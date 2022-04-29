@@ -1,0 +1,17 @@
+@import "common";
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+
+  input {
+    width: 18px;
+    height: 18px;
+    margin: 0 8px 0 0;
+
+    &:checked {
+      background: #00B3FF;
+    }
+  }
+}

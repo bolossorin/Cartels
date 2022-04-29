@@ -1,0 +1,33 @@
+@import '../../../../../styles/common';
+
+.left-panel-mobile-container {
+    @include leftRightPanelsMobile;
+
+    left: 0;
+    flex-direction: row;
+    transform: translateX(calc(-100% + 34px));
+
+    .pull-menu-arrow {
+        border-right: solid;
+        border-color: $ul-bottom-border;
+        border-width: 2px;
+
+        img {
+            transform: rotate(180deg);
+        }
+    }
+
+    &__open {
+        transform: translateX(0);
+
+        .pull-menu-arrow {
+            img {
+                transform: rotate(0deg);
+            }
+        }
+    }
+
+    @media (min-width: $breakpoint-desktop) {
+        display: none;
+    }
+}

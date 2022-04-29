@@ -1,0 +1,75 @@
+@import '../../../../../styles/common';
+
+.equipped-weapon-protection {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .name {
+        //font-family: $font-accented-header;
+    }
+
+    .equipped-weapon {
+        flex-grow: 0;
+        flex-shrink: 0;
+        width: 142px;
+        height: 142px;
+        padding: 8px 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        background: radial-gradient(circle at center, #042532 0%, transparent 70%);
+        border-radius: 12px;
+
+        .name {
+            text-align: center;
+        }
+
+        .weapon-image {
+            max-width: 70%;
+            max-height: 70%;
+        }
+
+        .bullets {
+            height: 18px;
+            display: flex;
+            justify-content: center;
+
+            img {
+                height: 100%;
+            }
+
+            .count {
+                color: $color-body-grey;
+            }
+        }
+    }
+
+    .equipped-protection {
+        flex-grow: 0;
+        flex-shrink: 0;
+        width: calc(100% - 142px - 8px);
+        height: 142px;
+        padding: 8px 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        background: radial-gradient(circle at center, #042532 0%, transparent 70%);
+        border-radius: 12px;
+
+        .name {
+            text-align: center;
+        }
+
+        .weapon-image {
+            height: 70%;
+        }
+
+        .level {
+            color: $color-body-grey;
+            text-shadow: 0 0 4px transparentize($color-red-alert, 0.15);
+        }
+    }
+}

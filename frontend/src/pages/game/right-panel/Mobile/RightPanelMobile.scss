@@ -1,0 +1,66 @@
+@import '../../../../styles/common';
+
+.right-panel-mobile-container {
+    @include leftRightPanelsMobile;
+
+    left: 100%;
+    flex-direction: row-reverse;
+    transform: translateX(-34px);
+
+    .pull-menu-arrow {
+        border-left: solid;
+        border-width: 2px;
+        border-color: $ul-bottom-border;
+        border-radius: 6px 0 0 6px;
+
+        img {
+            transform: rotate(0deg);
+        }
+    }
+
+    &__open {
+        transform: translateX(calc(-100%));
+
+        .pull-menu-arrow {
+            img {
+                transform: rotate(180deg);
+            }
+        }
+    }
+
+    @media (min-width: $breakpoint-desktop) {
+        display: none;
+    }
+
+    .discord-button {
+        margin-top: $padding-med;
+    }
+
+    .rules {
+        margin-top: $padding-large;
+        text-align: center;
+
+        .rules-link {
+            color: $color-cartels-blue;
+            text-decoration: underline;
+            font-family: $font-body-heavy;
+            font-size: $font-size-xs;
+            margin: $padding-med auto auto;
+            text-decoration-color: darken($color-cartels-blue, 15%);
+            text-decoration-skip-ink: all;
+            text-underline-offset: 3px;
+
+            &:hover {
+                color: lighten($color-cartels-blue, 15%);
+            }
+
+            img {
+                display: inline-block;
+                margin-top: -2px;
+                vertical-align: middle;
+                height: 24px;
+                margin-left: 8px;
+            }
+        }
+    }
+}

@@ -1,0 +1,14 @@
+.progress-strip {
+  padding: 12px 8px;
+  background: radial-gradient(ellipse at top, #282828, transparent),
+  radial-gradient(ellipse at bottom, #979797, transparent);
+  min-height: 56px;
+  border-bottom: 2px solid rgba(38, 115, 158, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  b {
+    color: #d7d7d7;
+  }
+}

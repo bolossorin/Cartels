@@ -1,0 +1,246 @@
+@import '../../../../../styles/common';
+
+.inventory-box {
+    .inventory-box__header {
+        @include leftSideBoxesPadding;
+        @include contentBoxHeaderGradient;
+        @include sideBoxHeader(right, 0);
+    }
+
+    .inventory-box__list {
+        ul {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
+            grid-row-gap: 5px;
+            grid-column-gap: 5px;
+            justify-content: space-evenly;
+
+            li {
+                min-height: 72px;
+                min-width: 72px;
+                width: 100%;
+                justify-self: center;
+                align-self: center;
+                display: inline-block;
+                position: relative;
+                background: $color-items;
+                border-radius: 8px;
+                transition: all 0.2s;
+                overflow: hidden;
+                border: 1px solid transparent;
+                cursor: pointer;
+
+                &:after {
+                    padding-top: 100%;
+                    display: block;
+                    content: '';
+                }
+
+                &:hover {
+                    //z-index: 2;
+                    background: radial-gradient(circle at center, #042532 0%, #100f10 70%);
+                    border: 1px solid $color-white;
+
+                    .inventory-box__item {
+                        &__count {
+                            &--above-limit {
+                                .default {
+                                    display: none !important;
+                                }
+                                .full {
+                                    display: inline !important;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .inventory-box__tooltip {
+                    position: absolute;
+                    top: -10%;
+                    left: 100%;
+                    z-index: 1;
+                    pointer-events: none;
+                    visibility: hidden;
+                    opacity: 0;
+                    transition: opacity 0.4s;
+
+                    &__box {
+                        position: relative;
+                        border: 1px solid #1F8CC2;
+                        background: #11151d;
+                        min-width: 100px;
+                        min-height: 100px;
+                        margin-left: 15px;
+
+                        &:after, &:before {
+                            right: 100%;
+                            top: 10%;
+                            border: solid transparent;
+                            content: " ";
+                            height: 0;
+                            width: 0;
+                            position: absolute;
+                            pointer-events: none;
+                        }
+
+                        &:after {
+                            border-color: rgba(136, 183, 213, 0);
+                            border-right-color: #1F8CC2;
+                            border-width: 6px;
+                            margin-top: -6px;
+                        }
+
+                        &:before {
+                            border-color: rgba(194, 225, 245, 0);
+                            border-right-color: #1F8CC2;
+                            border-width: 12px;
+                            margin-top: -12px;
+
+                        }
+                    }
+                }
+
+                .inventory-box__item {
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    right: 0;
+                    left: 0;
+                    min-height: 72px;
+                    min-width: 72px;
+                    max-width: 110px;
+                    display: block;
+                    transition: 0.2s all;
+                    overflow: hidden;
+
+                    .inventory-box__image-container {
+                        position: absolute;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        width: 100%;
+                        height: 100%;
+                        padding-right: 2px;
+                        padding-bottom: 10%;
+
+                        img {
+                            max-width: 90%;
+                            max-height: 90%;
+                        }
+                    }
+
+                    .inventory-box__item__count {
+                        position: absolute;
+                        bottom: 4px;
+                        right: 4px;
+
+                        span {
+                            font-size: 14px;
+                            color: $blue-title-font;
+                        }
+
+                        &--above-limit {
+                            span {
+                                color: $color-orange;
+                                text-transform: uppercase;
+                            }
+
+                            .full {
+                                display: none;
+                            }
+                            .default {
+                                display: inline;
+                            }
+                        }
+                    }
+
+                    .inventory-box__worn {
+                        position: absolute;
+                        right: 5px;
+                        top: 2px;
+                    }
+
+                    .rarity-band {
+                        position: absolute;
+                        height: calc(100% - 2px);
+                        width: 4px;
+
+                        .triangle {
+                            position: absolute;
+                            top: calc(50% - 5px);
+                            left: -1px;
+                            background: inherit;
+                            width: 8px;
+                            height: 8px;
+                            transform: rotate(45deg);
+                        }
+
+
+                    }
+                }
+                .item-rarity-0 {
+
+
+                    .inventory-box__worn {
+                        svg {
+                            fill: #23567190;
+                        }
+                    }
+                }
+                .item-rarity-1 {
+
+
+                    .inventory-box__worn {
+                        svg {
+                            fill: #1458be90;
+                        }
+                    }
+
+                    .rarity-band {
+                        background: #1458be;
+                    }
+                }
+                .item-rarity-2 {
+
+
+                    .inventory-box__worn {
+                        svg {
+                            fill: #872fb790;
+                        }
+                    }
+
+                    .rarity-band {
+                        background: #872fb7;
+                    }
+                }
+                .item-rarity-3 {
+
+
+                    .inventory-box__worn {
+                        svg {
+                            fill: #d8203390;
+                        }
+                    }
+
+                    .rarity-band {
+                        background: #d82033;
+                    }
+                }
+                .item-rarity-4 {
+
+
+                    .inventory-box__worn {
+                        svg {
+                            fill: #d0b96f90;
+                        }
+                    }
+
+                    .rarity-band {
+                        background: #d0b96f;
+                    }
+                }
+            }
+        }
+    }
+}

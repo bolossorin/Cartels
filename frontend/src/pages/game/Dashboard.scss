@@ -1,0 +1,135 @@
+@import '../../styles/common';
+
+html {
+    min-height: 100%;
+    overflow: initial;
+
+    #root {
+        height: 100%;
+
+        .app {
+            height: 100%;
+
+            .container {
+                height: 100%;
+            }
+        }
+    }
+}
+
+.container {
+    width: 100%;
+    overflow: initial;
+    background-image: linear-gradient(to bottom, #08080880, #08080890, #08080890, #080808), url('https://static-assets.cartels.com/static/img/b0c8ccc5d1c3671f334f882cd27d9bc5.png?auto=compress');
+    background-position: center 65px;
+
+    @media (max-width: $breakpoint-desktop) {
+        //background: linear-gradient(to top, #0b0d0f 0%, #141617 100%), #1e1e1e !important;
+        background-position: center;
+    }
+
+    @media (max-width: $breakpoint-intermediary) {
+        background-image: linear-gradient(to bottom, #08080880, #08080890, #08080890, #080808);
+    }
+}
+
+.content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    max-width: 1328px;
+    margin: 8px auto;
+
+    @media (max-width: $breakpoint-desktop) {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        margin: auto;
+    }
+}
+
+.column-1,
+.column-3 {
+    width: 293px;
+    height: 100%;
+    flex-shrink: 0;
+    //background: #040404;
+
+    @media (max-width: $breakpoint-desktop) {
+        display: none;
+    }
+}
+
+main {
+    width: 100%;
+    overflow: hidden;
+
+    @media (min-width: $breakpoint-desktop) {
+        padding: 0 7px;
+    }
+
+    @media (max-width: $breakpoint-desktop) {
+        padding: 0 $mobile-side-gutter 68px;
+    }
+
+    @media (max-width: 355px) {
+        padding: 0 0 68px;
+    }
+}
+
+.content-box {
+    margin-bottom: 8px;
+}
+
+.box-header {
+    margin-top: 8px;
+}
+
+footer {
+
+    span {
+        opacity: 0.5;
+    }
+}
+
+.overlord-control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+    color: white;
+    margin-top: 22px;
+    margin-bottom: 22px;
+
+    button {
+        background: #00000066;
+        border: 1px solid #232323;
+        border-radius: 12px;
+        padding: 7px 30px 3px;
+        transition: 0.5s all;
+        color: rgba(138, 91, 158, 0.85);
+        font-size: 16pt;
+        display: inline-flex;
+        align-items: center;
+        font-family: 'FuturaBoldOblique', sans-serif;
+
+        &:hover {
+            img {
+                transform: scale(1.1);
+                opacity: 0.75;
+            }
+
+            cursor: pointer;
+            box-shadow: 0 0 12px rgba(96, 22, 109, 0.31);
+            border: 1px solid #747474;
+            background-color: #000;
+        }
+
+        img {
+            height: 38px;
+            width: 38px;
+            opacity: 0.25;
+            transition: 0.5s all;
+        }
+    }
+}

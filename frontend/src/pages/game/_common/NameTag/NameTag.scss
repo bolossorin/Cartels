@@ -1,0 +1,24 @@
+@import '../../../../styles/common';
+
+.name-tag {
+    color: $white-font-darker;
+    display: flex;
+    align-items: center;
+
+    p {
+        font-size: $font-size-s;
+        font-family: $font-accented-header;
+    }
+
+    .role-img {
+        margin-right: 10px;
+    }
+
+    &__administrator {
+        //color: $administrator-color;
+    }
+
+    &__moderator {
+        //color: $moderator-color;
+    }
+}

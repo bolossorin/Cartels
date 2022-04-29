@@ -1,0 +1,60 @@
+@import 'common';
+
+.button {
+  width: 100%;
+  flex-grow: 1;
+  height: 100%;
+  padding: $padding-med;
+  border-radius: 0;
+  border: none;
+  text-transform: uppercase;
+  background-color: $button-dark-blue;
+  color: $white-font-darker;
+  cursor: pointer;
+  min-width: 105px;
+  font-size: 14pt;
+  transition: 0.2s all;
+  font-family: 'FuturaBook', sans-serif;
+
+  &:not(:disabled):hover {
+    filter: brightness(130%);
+  }
+
+  &:not(:disabled):active {
+    //transform: scale(0.96);
+    box-shadow: inset 0 0 24px rgba(255, 255, 255, 0.48);
+  }
+
+  &:disabled {
+    box-shadow: inset 0 0 24px rgba(0, 0, 0, 0.48);
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &__green {
+    background-color: $button-green;
+  }
+
+  &__red {
+    background-color: $button-red;
+  }
+
+  &__secondary {
+    border-radius: $padding-med;
+    border: 2px solid #804d80;
+    background-color: unset;
+    color: #cb6fcb;
+
+    &:not(:disabled):hover {
+      background-color: #36103699;
+    }
+  }
+
+  &__cancel {
+    background-color: #262d2f;
+
+    &:not(:disabled):hover {
+      background-color: #151a1c;
+    }
+  }
+}

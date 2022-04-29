@@ -1,0 +1,35 @@
+@import "common";
+
+.right-panel {
+  .discord-button {
+    margin-top: $padding-med;
+  }
+
+  .rules {
+    margin-top: $padding-large;
+    text-align: center;
+
+    .rules-link {
+      color: $color-cartels-blue;
+      text-decoration: underline;
+      font-family: $font-body-heavy;
+      font-size: $font-size-xs;
+      margin: $padding-med auto auto;
+      text-decoration-color: darken($color-cartels-blue, 15%);
+      text-decoration-skip-ink: all;
+      text-underline-offset: 3px;
+
+      &:hover {
+        color: lighten($color-cartels-blue, 15%);
+      }
+
+      img {
+        display: inline-block;
+        margin-top: -2px;
+        vertical-align: middle;
+        height: 24px;
+        margin-left: 8px;
+      }
+    }
+  }
+}

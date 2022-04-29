@@ -1,0 +1,301 @@
+@import '../../../styles/common';
+
+.bank {
+    position: relative;
+
+    .content-masthead {
+        position: relative;
+        z-index: 1;
+        text-shadow: 4px 4px 8px #000000;
+    }
+
+    .background {
+        position: absolute;
+        width: 100%;
+        left: 0;
+        top: 0;
+        -webkit-mask-image: linear-gradient(to bottom, black 30%, transparent 95%);
+        mask-image: linear-gradient(to bottom, black 30%, transparent 95%);
+        user-select: none;
+
+        @media (max-width: $breakpoint-intermediary) {
+            width: $breakpoint-intermediary;
+            left: calc(50% - 350px);
+        }
+    }
+
+    &__account {
+        position: relative;
+        z-index: 1;
+        background: rgba(255, 255, 255, 0.02);
+        border-radius: 8px;
+        padding: $content-padding;
+
+        &__market {
+            margin-top: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            font-family: $font-body-heavy;
+            background: #0A0A0A77;
+            border-radius: 4px;
+            padding: 6px 14px;
+            width: max-content;
+
+            &__positive, &__very-positive {
+                color: $color-cash-green;
+
+                img {
+                    filter: invert(52%) sepia(31%) saturate(2359%) hue-rotate(417deg);
+                }
+            }
+
+            &__flat {
+                color: $color-gold-yellow;
+
+                img {
+                    filter: invert(52%) sepia(31%) saturate(2359%) hue-rotate(390deg);
+                    transform: rotateZ(90deg);
+                }
+            }
+
+            &__negative, &__very-negative {
+                color: $color-red-alert;
+
+                img {
+                    filter: invert(52%) sepia(31%) saturate(2359%) hue-rotate(337deg);
+                    transform: rotateZ(180deg);
+                }
+            }
+
+            img {
+                height: 32px;
+                width: 32px;
+                margin-right: 6px;
+                opacity: 0.6;
+            }
+        }
+
+        &__amount {
+            font-family: $font-accented-header;
+            font-size: $font-size-l;
+
+        }
+
+        &__category {
+            display: flex;
+            align-items: center;
+            margin-bottom: $padding-med;
+
+            > p {
+                font-family: $font-accented-header;
+                text-transform: uppercase;
+            }
+
+            > div {
+                width: 10px;
+                height: 10px;
+                border-radius: 5px;
+                z-index: 2;
+                position: relative;
+                margin-right: 4px;
+            }
+
+            &--mainstream {
+                > div {
+                    background: #61FFA0;
+                }
+                > p {
+                    color: #61FFA0;
+                }
+            }
+
+            &--risky {
+                > div {
+                    background: $color-gold-yellow;
+                }
+                > p {
+                    color: $color-gold-yellow;
+                }
+            }
+
+            &--uncharted {
+                > div {
+                    background: $color-red-alert;
+                }
+                > p {
+                    color: $color-red-alert;
+                }
+            }
+        }
+
+        &--savings {
+            margin-top: 220px;
+
+            span {
+                color: $color-cash-green;
+            }
+        }
+
+        &--investment {
+            margin-top: $content-padding;
+
+            span {
+                color: $color-cartels-blue;
+            }
+        }
+
+        > h3 {
+            font-family: $font-accented-header;
+            font-size: $font-size-s;
+            margin-bottom: 24px;
+        }
+
+        &__time {
+            margin-top: $padding-med;
+        }
+
+        &__result {
+            font-size: $font-size-s;
+            margin-top: $padding-med;
+
+            &--positive {
+                color: $color-cash-green;
+            }
+
+            &--negative {
+                color: $color-red-alert;
+            }
+        }
+
+        &__form {
+            form {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                grid-row-gap: 5px;
+                grid-column-gap: $content-padding;
+                margin-top: 24px;
+
+                .input-container {
+                    margin-bottom: 0;
+                }
+
+                .input-container, button {
+                    height: 40px;
+                }
+
+                button {
+                    font-family: $font-body-heavy;
+                }
+            }
+
+            &--in-progress {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                max-width: 416px;
+                grid-column-gap: 16px;
+                margin-left: auto;
+                margin-right: 0;
+
+                form {
+                    button {
+                        max-width: 208px;
+                        margin-left: auto;
+                    }
+                }
+            }
+        }
+
+        .more-details {
+            position: absolute;
+            right: $content-padding;
+            top: $content-padding;
+            color: $color-annotation-grey;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .investment-strategies {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(159px, 1fr));
+            grid-row-gap: 5px;
+            grid-column-gap: $content-padding;
+            margin-bottom: 24px;
+
+            button {
+                height: 58px;
+                text-transform: uppercase;
+                font-family: $font-accented-header;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                > div {
+                    width: 10px;
+                    height: 10px;
+                    border-radius: 5px;
+                    z-index: 2;
+                    position: relative;
+                    margin-right: 4px;
+                }
+            }
+
+            .strategy {
+
+                &--mainstream {
+                    > div {
+                        background: #61FFA0;
+                    }
+                    > p {
+                        color: #61FFA0;
+                    }
+                }
+
+                &--risky {
+                    > div {
+                        background: $color-gold-yellow;
+                    }
+                    > p {
+                        color: $color-gold-yellow;
+                    }
+                }
+
+                &--uncharted {
+                    > div {
+                        background: $color-red-alert;
+                    }
+                    > p {
+                        color: $color-red-alert;
+                    }
+                }
+
+                &--selected {
+                    background: rgba(0, 164, 255, 0.18);
+                    border: 1px solid #00A4FF;
+                }
+            }
+        }
+
+        &__details {
+            display: inline;
+
+            &--hidden {
+                display: none;
+            }
+        }
+    }
+
+    .bank-in-progress {
+        display: flex;
+        align-items: center;
+
+        > img {
+            height: 120px;
+            margin: -5px -16px;
+        }
+
+        img.blue {
+            filter: invert(1) hue-rotate(235deg);
+        }
+    }
+}

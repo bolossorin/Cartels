@@ -1,0 +1,85 @@
+@import '../../../../styles/common';
+
+.loading-star {
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 32px;
+
+    animation : shimmer 2s infinite;
+    background: linear-gradient(to right, transparent 4%, rgba(200, 200, 255, 0.04) 25%, transparent 36%);
+    background-size: 1000px 100%;
+
+    &__image {
+        //animation: star-spin 3s infinite;
+        opacity: 0.75;
+        height: 60px;
+        width: 60px;
+    }
+
+
+    p {
+        padding-left: 12px;
+        color: $white-font-darker;
+
+        strong {
+            display: block;
+            font-size: 24px;
+            color: $font-dark-blue;
+        }
+    }
+
+    &.integrated-loader {
+        width: 100%;
+        height: 68px;
+    }
+}
+
+.full-screen-loader {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .loading-star {
+        background: linear-gradient(to right, #000000 0%, #ffffff45 25%, #000000 50%);
+        animation : full-shimmer 2s infinite;
+        width: 300px;
+        box-shadow: 0 0 4px 8px #141414;
+        border-radius: 4px;
+
+        &.integrated-loader {
+            height: 30px;
+        }
+
+        &__image {
+            height: 110px;
+            width: 110px;
+            position: absolute;
+            top: calc(50% - 55px);
+            left: calc(50% - 55px);
+            opacity: 1;
+        }
+    }
+}
+
+@keyframes full-shimmer {
+    0% {
+        background-position: -300px 0;
+    }
+    100% {
+        background-position: 300px 0;
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}

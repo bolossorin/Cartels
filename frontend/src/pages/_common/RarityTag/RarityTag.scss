@@ -1,0 +1,26 @@
+@import "common";
+
+.rarity-tag {
+  padding: 4px 12px;
+  border: 1px solid #ffffff30;
+  border-radius: 8px;
+  box-shadow: inset 0 0 4px #00000050;
+  text-transform: uppercase;
+
+  &__cyan {
+    border-color: #18c7b3;
+  }
+
+  &__blue {
+    border-color: #1867c7;
+  }
+
+  &__purple {
+    border-color: #932aba;
+  }
+
+  &__pink {
+    border-color: #d09bfa;
+    background: linear-gradient(to top right, #ea313150, #31eadb50, #c231ea50, #ead13150, #ea313150);
+  }
+}

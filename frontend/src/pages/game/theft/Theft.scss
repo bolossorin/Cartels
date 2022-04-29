@@ -1,0 +1,244 @@
+@import "common";
+
+.theft-level-bar {
+  margin-top: $padding-m;
+}
+
+.car-theft {
+  padding-bottom: 100px;
+}
+
+.theft-tab-banner {
+  background: linear-gradient(to right, transparent, #ffffff27, transparent);
+  font-family: $font-body;
+  font-size: $font-size-l;
+  margin-top: $padding-large;
+  text-align: center;
+  text-transform: uppercase;
+  padding: 4px;
+
+  &__result {
+    margin-top: $padding-large;
+    margin-bottom: $padding-large;
+    background: linear-gradient(to right, transparent, $color-cartels-blue10, transparent);
+    font-family: $font-accented-header;
+  }
+
+  &__sub-label {
+    display: inline-block;
+    padding-left: $padding-med;
+    color: $color-cartels-blue;
+    font-family: $font-accented-header;
+  }
+}
+
+.theft-errors {
+  text-align: center;
+}
+
+.theft-garage-cta {
+  display: inline-block;
+  float: right;
+
+  button {
+    font-size: $font-size-xs;
+    padding: 6px 0;
+  }
+}
+
+.theft-tab {
+  margin-top: $padding-med;
+  padding: $padding-m 0;
+  margin-right: 4px;
+  border: 0;
+  font-family: $font-accented-header;
+  font-size: $font-size-s;
+  transition: 0.4s all;
+
+  &.tabs__item__selected {
+    animation: theft-tab-pulsate 1s infinite;
+    animation-iteration-count: 1;
+  }
+
+  &:not(.tabs__item__selected) {
+    background: linear-gradient(to bottom, #ffffff1d, transparent);
+  }
+
+  &__residential {
+    border-top: 4px solid $color-cartels-blue;
+    background: linear-gradient(to bottom, $color-cartels-blue30, transparent);
+  }
+
+  &__commercial {
+    border-top: 4px solid $color-gold-yellow;
+    background: linear-gradient(to bottom, $color-gold-yellow30, transparent);
+  }
+
+  &__corporate {
+    border-top: 4px solid $color-red-alert;
+    background: linear-gradient(to bottom, $color-red-alert30, transparent);
+  }
+}
+
+.theft-blueprint {
+  width: 100%;
+  position: relative;
+  background-size: cover;
+  margin-top: $padding-large;
+
+  &:after {
+    padding-top: 76%;
+    display: block;
+    content: '';
+  }
+
+  .point {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: #0c2a4c 2px solid;
+
+    &:hover {
+      transition: all 0.2s;
+      transform: scale(1.3);
+      //cursor: pointer;
+    }
+
+    &--easy {
+      background: #1FA5DF;
+      box-shadow: 0 0 15px 5px #1FA5DF;
+    }
+
+    &--risky {
+      background: #FFC700;
+      box-shadow: 0 0 15px 5px #FFC700;
+    }
+
+    &--medium {
+      background: #15C059;
+      box-shadow: 0 0 15px 5px #15C059;
+    }
+
+    &--crackdown {
+      background: #D13722;
+      box-shadow: 0 0 15px 5px #D13722;
+    }
+  }
+
+  &--house {
+    .point {
+
+      &--easy {
+        top: 50%;
+        left: 7%;
+      }
+
+      &--risky {
+        bottom: 25%;
+        right: 8%;
+      }
+
+      &--medium {
+        bottom: 21%;
+        left: 17%;
+      }
+
+      &--crackdown {
+        top: 21%;
+        right: 43%;
+      }
+    }
+  }
+  &--garage {
+    .point {
+
+      &--easy {
+        top: 28%;
+        left: 13%;
+      }
+
+      &--risky {
+        bottom: 25%;
+        right: 14%;
+      }
+
+      &--medium {
+        bottom: 15%;
+        left: 25%;
+      }
+
+      &--crackdown {
+        top: 15%;
+        left: 47%;
+      }
+    }
+  }
+  &--impound {
+    .point {
+
+      &--easy {
+        top: 10%;
+        left: 4%;
+      }
+
+      &--risky {
+        top: 50%;
+        right: 3%;
+      }
+
+      &--medium {
+        bottom: 17%;
+        left: 13%;
+      }
+
+      &--crackdown {
+        top: 49%;
+        left: 43.5%;
+      }
+    }
+  }
+}
+
+.theft-buttons form {
+  margin: $padding-large auto;
+  display: grid;
+  max-width: 400px;
+  grid-template-columns: 1fr 1fr;
+  row-gap: $padding-med;
+  column-gap: $padding-med;
+
+  .content-text__top-desktop {
+    display: none;
+  }
+
+  button {
+    font-family: $font-title;
+    font-size: $font-size-xs;
+    height: unset;
+  }
+
+  @media (min-width: $breakpoint-intermediary) {
+    max-width: none;
+    width: 100%;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    margin-bottom: -22px;
+
+
+    .content-text__top-desktop {
+      display: inline;
+    }
+
+    .content-text__bottom-mobile {
+      display: none;
+    }
+
+    .theft-buttons__items {
+      width: 25%;
+    }
+
+    button {
+      height: 61px;
+    }
+  }
+}

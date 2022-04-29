@@ -1,0 +1,205 @@
+@import "common";
+
+.easter {
+  padding-bottom: 0;
+
+  &__top-background {
+    min-height: 800px;
+    margin: -$content-padding;
+    margin-bottom: 0;
+    padding: $content-padding;
+    background: linear-gradient(to bottom, #0E111500 0%, #0E1115 500px), url('../../../assets/images/easter/booth.png');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    .content-masthead {
+      margin-top: 200px;
+    }
+  }
+
+  &__description {
+    color: $color-body-grey;
+  }
+
+  &__status {
+    font-family: $font-accented-header;
+    font-size: $font-size-m;
+    //color: $color-cash-green;
+    border-radius: 8px;
+    width: 50%;
+    margin: -122px auto 90px auto;
+    padding: 12px;
+    background-color: #00000075;
+    backdrop-filter: blur(32px);
+    text-align: center;
+  }
+
+  &__preload {
+    height: 0;
+    width: 0;
+    visibility: hidden;
+    position: relative;
+  }
+
+  &__machine {
+    height: 680px;
+    width: 100%;
+    position: relative;
+
+    &__win {
+      position: absolute;
+      top: 485px;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+
+      img {
+        height: 64px;
+        width: 64px;
+        animation: ec-pulsate-golden-egg cubic-bezier(.17,.67,.37,1) 3.5s;
+        animation-fill-mode: forwards;
+        opacity: 1;
+      }
+    }
+
+    &__inactive {
+      position: absolute;
+      background: url('assets/images/easter/coming_red_light.png');
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center top;
+      width: 100%;
+      height: 100%;
+    }
+
+    &__base {
+      position: absolute;
+      background: url('assets/images/easter/red_light.png');
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center top;
+      width: 100%;
+      height: 100%;
+
+      &__ready {
+        cursor: pointer;
+      }
+    }
+
+    &__ready {
+      position: absolute;
+      background: url('assets/images/easter/yellow_light.png');
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center top;
+      width: 100%;
+      height: 100%;
+    }
+
+    &__video {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+
+      video {
+        margin-top: 6px;
+        height: 668px !important;
+      }
+    }
+
+    &__egg1 {
+      position: absolute;
+      background: url('assets/images/easter/slots/EGG1.png');
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center top;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    &__egg2 {
+      position: absolute;
+      background: url('assets/images/easter/slots/EGG2.png');
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center top;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    &__egg3 {
+      position: absolute;
+      background: url('assets/images/easter/slots/EGG3.png');
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center top;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    &__egg4 {
+      position: absolute;
+      background: url('assets/images/easter/slots/EGG4.png');
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center top;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    &__egg5 {
+      position: absolute;
+      background: url('assets/images/easter/slots/EGG5.png');
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center top;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    &__egg6 {
+      position: absolute;
+      background: url('assets/images/easter/slots/EGG6.png');
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center top;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+  }
+}
+
+@keyframes ec-pulsate-golden-egg {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  10% {
+    opacity: 1;
+    transform: scale(1.35);
+  }
+  40% {
+    transform: scale(1);
+  }
+  60% {
+    transform: scale(1.35);
+  }
+  80% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-800px);
+    opacity: 0;
+  }
+}

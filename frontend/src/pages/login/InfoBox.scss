@@ -1,0 +1,36 @@
+@import '../../styles/common';
+
+.infobox {
+  &__images {
+    display: flex;
+    flex-wrap: wrap;
+    margin: -5px;
+
+    &__image {
+      width: 46px;
+      height: 46px;
+      border-radius: 8px;
+      margin: 5px;
+      filter: invert(1);
+
+      &:hover {
+        filter: invert(0);
+        background: $color-cartels-blue;
+        cursor: pointer;
+      }
+
+      &--active {
+        filter: invert(0);
+        background: $color-cartels-blue;
+
+        &:hover {
+          cursor: auto;
+        }
+      }
+    }
+  }
+
+  &__text {
+    margin-top: $padding-m;
+  }
+}

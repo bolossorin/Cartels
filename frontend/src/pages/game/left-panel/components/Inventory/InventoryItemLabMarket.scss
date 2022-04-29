@@ -1,0 +1,40 @@
+@import 'common';
+
+.inventory-item-lab-market {
+  &__pricing {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 18px;
+
+    &__box {
+      border: 1px solid #151515;
+      border-radius: 12px;
+      margin: 4px;
+      padding: $padding-med;
+      box-shadow: inset 0 0 12px rgba(0, 0, 0, .3);
+      width: 100%;
+
+      h3 {
+        color: $blue-title-font;
+        font-family: 'FuturaHeading', sans-serif;
+        font-size: 18px;
+        text-align: center;
+      }
+
+      .balance {
+        width: max-content;
+        margin: auto;
+      }
+    }
+  }
+
+  &__hint {
+    color: #888;
+    width: 90%;
+    max-width: 400px;
+    font-family: 'Futura', sans-serif;
+    text-align: center;
+    margin: 8px auto auto;
+  }
+}

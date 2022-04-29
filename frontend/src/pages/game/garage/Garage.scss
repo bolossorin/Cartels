@@ -1,0 +1,219 @@
+@import "common";
+
+.garage {
+  &__header {
+      display: grid;
+      grid-template-columns: 75px 2fr auto;
+      align-items: center;
+
+      // Changing the masthead styles here as it does not by default
+      // work with this grid.
+      @media (max-width: $breakpoint-desktop) {
+        .content-masthead span {
+            margin-top: 0 !important;
+            padding-bottom: 0 !important;
+        }
+      } 
+
+      .icon {
+        margin-left: 1em;
+        justify-self: end;
+
+        cursor: pointer;
+      }
+
+      .search-input {
+        margin-left: 1em;
+        position: relative;
+        img {
+          position: absolute;
+          top: 12px;
+          right: 12px;
+        }
+      }
+  }
+
+  &__location {
+    margin: 1em 0 .6em 0;
+    p {
+      font-weight: bold;
+      font-family: $font-title;
+    }
+  }
+}
+
+.inventory-page {
+  &__list {
+    display: flex;
+    flex-direction: column;
+
+    &__item {
+      &__box {
+        cursor: pointer;
+        display: grid;
+        grid-template-columns: 130px 1fr;
+        align-items: center;
+        background: #110f12;
+        transition: 0.2s all;
+        margin-bottom: 1em;
+        border: 1px solid transparent;
+        border-radius: 8px;
+
+        &:hover {
+          cursor: pointer;
+          border: 1px solid $color-white;
+        }
+
+        &:hover {
+          img {
+            transform: scale(1.1);
+          }
+        }
+
+
+        &__statistics {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          align-items: space-between;
+          &__title__and__plate {
+            margin-left: 1em;
+            
+            display: grid;
+            grid-template-columns: 1fr;
+
+            .__vehicle_name {
+              font-size: $font-size-m;
+              font-style: italic;
+              font-family: $font-accented-header;
+              color: #fff;
+            }
+            .__vehicle_plate {
+              color: $color-annotation-grey;
+              font-family: $font-body;
+              padding: 2px;
+              font-size: 16px;
+            }
+          }
+          &__dmg {
+            justify-self: end;
+            align-self: center;
+            color: $color-red-alert;
+            font-family: $font-accented-header;
+            padding: 2px;
+            padding-right: 1em;
+            font-size: $font-size-m;
+            text-align: right;
+         } 
+        }
+        &__image {
+          padding: 6px 0;
+
+          img {
+            height: 75px;
+            max-width: 100%;
+            transition: 0.2s all;
+          }
+        }
+      }
+    }
+  }
+  &__grid {
+    margin-top: $padding-med;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(130px, 1fr));
+    grid-row-gap: 16px;
+    grid-column-gap: 10px;
+    justify-content: space-evenly;
+
+    &__item {
+      min-width: 130px;
+      width: 100%;
+      justify-self: center;
+      align-self: center;
+      display: inline-block;
+      position: relative;
+      background: $color-items;
+      transition: all 0.2s;
+      overflow: hidden;
+
+      &__box {
+        position: relative;
+        border: 1px solid transparent;
+        border-radius: 8px;
+        background: #110f12;
+        min-width: 100px;
+        min-height: 130px;
+        background: radial-gradient(circle at center, #202625, #110f12, #110f12);
+        transition: 0.2s all;
+
+        &:hover {
+          cursor: pointer;
+          border-color: $color-white;
+        }
+
+        &:hover {
+          img {
+            transform: scale(1.1);
+          }
+        }
+
+        &__statistics {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          align-items: center;
+          padding: 0 32px;
+          padding-bottom: 22px;
+          margin-top: -12px;
+          &__title__and__plate {
+            font-family: $font-body-heavy;
+            font-size: $font-size-xs;
+            margin-top: 6px;
+            color: $color-white;
+
+            span {
+              display: grid;
+              grid-template-columns: 1fr;
+              justify-content: start;
+              &.__vehicle_name {
+                font-size: $font-size-m;
+                font-style: italic;
+                font-family: $font-accented-header;
+              }
+              &.__vehicle_plate {
+                color: $color-body-grey;
+              }
+            }
+          }          
+        }
+
+        &__image {
+          text-align: center;
+          padding: 6px 0;
+          padding-top: 24px;
+
+          img {
+            height: 75px;
+            max-width: 100%;
+            transition: 0.2s all;
+          }
+        }
+
+        &__plate {
+          color: $color-annotation-grey;
+          font-family: $font-body;
+          padding: 2px;
+          text-align: center;
+          font-size: 12px;
+        }
+
+        &__stats {
+          color: $color-red-alert;
+          font-family: $font-accented-header;
+          padding: 2px;
+          font-size: $font-size-m;
+          text-align: right;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,24 @@
+@import '../../../../../styles/common';
+
+.balances-container {
+    width: 100%;
+
+
+    .balance {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        margin-bottom: 8px;
+        text-transform: uppercase;
+
+        p {
+            white-space: nowrap;
+            font-family: $font-title;
+            font-size: $font-size-s;
+        }
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}

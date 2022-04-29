@@ -1,0 +1,122 @@
+@import '../../../styles/common';
+
+.profile {
+  //background:  linear-gradient(to bottom, #0e0d1099 254px, #0e0d10);
+
+  .content-masthead {
+    width: 100%;
+    padding: 0;
+
+    > span {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+
+      .profile-header {
+        //hidden for now
+        display: none;
+        //display: flex;
+        height: 38px;
+
+        .rounded-button {
+          min-width: 0;
+          width: auto;
+          margin-left: $padding-m;
+        }
+
+        &__more {
+          width: 38px;
+        }
+      }
+    }
+  }
+
+  &__info {
+    display: flex;
+    margin-top: $padding-m;
+    margin-bottom: $padding-m;
+
+    &__avatar {
+      height: 152px;
+      border-radius: 15px;
+
+      @media (max-width: $breakpoint-intermediary) {
+       height: 120px;
+      }
+
+      > img {
+        height: 100%;
+        border-radius: inherit;
+      }
+    }
+
+    &__text {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      margin-left: $content-padding;
+
+      .name-tag {
+        p {
+          font-size: $font-size-l;
+        }
+      }
+
+      &__rank {
+        font-family: $font-body-heavy;
+      }
+
+      &__wealth {
+        font-family: $font-body-heavy;
+      }
+    }
+  }
+
+  &__bio {
+    min-height: 30px;
+    background: #0e0d1099;
+    margin-right: - $content-padding;
+    margin-left: - $content-padding;
+
+    @media (max-width: $breakpoint-intermediary) {
+      margin-right: - $content-padding-mobile;
+      margin-left: - $content-padding-mobile;
+
+      &--edit {
+        padding: $content-padding-mobile;
+      }
+    }
+
+    &--unset {
+      height: 150px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    &--edit {
+      height: 150px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: $content-padding;
+
+      textarea {
+        height: 117px;
+        width: 100%;
+        background: #0e0d1099;
+        border-radius: 8px;
+        border-color: $color-dividers;
+        color: $color-white;
+        padding: 8px $padding-m;
+        resize: none;
+      }
+    }
+  }
+
+  .profile-bio-button {
+    width: auto;
+    float: right;
+    margin-top: $padding-m;
+  }
+}

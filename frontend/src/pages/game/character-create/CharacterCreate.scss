@@ -1,0 +1,402 @@
+.character-picker {
+    background: linear-gradient(to bottom, #000, #f1f1f1);
+    height: 450px;
+    width: 100%;
+    //padding-top: 100px;
+    position: relative;
+
+    .character-picker__stage {
+        height: 380px;
+        transition: 0.2s all;
+    }
+
+    .character-picker__characters {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 450px;
+        width: 700px;
+        margin-left: calc(50% - 350px);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        list-style: none;
+
+        li {
+            img {
+                height: 380px;
+                transition: 0.2s all ease-out;
+            }
+
+            &:nth-of-type(1) {
+                .character-picker__characters__assassin {
+                    margin-left: -120px;
+                }
+            }
+
+            &:not(:nth-of-type(2)) {
+                img {
+                    cursor: pointer;
+                    opacity: 0.75;
+
+                    &:hover {
+                        opacity: 1;
+                        transform: scale(1.05, 1.05);
+                    }
+                }
+            }
+
+            &:nth-of-type(2) {
+                z-index: 3;
+                width: 100%;
+                height: 100%;
+                margin: 0 auto;
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                pointer-events: none;
+                display: flex;
+                align-items: flex-end;
+                justify-content: center;
+
+                img {
+                    height: 440px;
+                    opacity: 1;
+                }
+            }
+        }
+    }
+
+    &__gangster {
+        > .character-picker__stage {
+            padding-top: 100px;
+            background: url('../../../assets/images/CharacterCreate/GANGSTER_BG_1900px.jpg');
+            background-size: 100% auto;
+            background-position: center;
+        }
+
+        h2,
+        p {
+            color: #26739e;
+        }
+    }
+
+    &__assassin {
+        > .character-picker__stage {
+            padding-top: 100px;
+
+            background: url('../../../assets/images/CharacterCreate/ASSASSIN_BG_1900px.jpg');
+            background-size: 100% auto;
+            background-position: center;
+        }
+
+        h2,
+        p {
+            color: #9e2626;
+        }
+    }
+
+    &__entrepreneur {
+        > .character-picker__stage {
+            padding-top: 100px;
+
+            background: url('../../../assets/images/CharacterCreate/ENTREPRENEUR_BG_1900px.jpg');
+            background-size: 100% auto;
+            background-position: center;
+        }
+
+        h2,
+        p {
+            color: #269e26;
+        }
+    }
+
+    &__info-container {
+        background: #fff;
+        position: relative;
+        z-index: 2;
+    }
+    &__info {
+        background: #fff;
+        height: 70px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 700px;
+        margin: auto;
+
+        h2 {
+            font-size: 16pt;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        img {
+            height: 48px;
+        }
+    }
+
+    @media (max-width: 870px) {
+        overflow: hidden;
+
+        .character-picker__characters {
+            height: 450px;
+            width: 700px;
+            margin-left: calc(50% - 350px);
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            list-style: none;
+
+            li {
+                img {
+                    height: 350px;
+                    transition: 0.2s all ease-out;
+                }
+
+                &:nth-of-type(1) {
+                    .character-picker__characters__assassin {
+                        margin-left: 0px;
+                    }
+                    .character-picker__characters__gangster {
+                        margin-left: 60px;
+                    }
+                }
+                &:nth-of-type(3) {
+                    .character-picker__characters__entrepreneur {
+                        margin-left: 70px;
+                    }
+                    .character-picker__characters__gangster {
+                        margin-left: -10px;
+                    }
+                }
+
+                &:not(:nth-of-type(2)) {
+                    img {
+                        cursor: pointer;
+                        opacity: 0.7;
+
+                        &:hover {
+                            transform: scale(1.05, 1.05);
+                        }
+                    }
+                }
+
+                &:nth-of-type(2) {
+                    left: 10px;
+                    bottom: 60px;
+
+                    img {
+                        height: 390px;
+                    }
+                }
+            }
+        }
+
+        &__gangster {
+            > .character-picker__stage {
+                background-size: cover;
+            }
+        }
+
+        &__assassin {
+            > .character-picker__stage {
+                background-size: cover;
+            }
+            .character-picker__characters {
+                li {
+                    &:nth-of-type(3) {
+                        .character-picker__characters__entrepreneur {
+                            margin-left: 150px;
+                        }
+                    }
+                }
+            }
+        }
+
+        &__entrepreneur {
+            > .character-picker__stage {
+                background-size: cover;
+            }
+        }
+
+        &__info-container {
+            position: relative;
+            z-index: 3;
+        }
+
+        &__info {
+            position: absolute;
+            z-index: 3;
+
+            height: 70px;
+
+            width: 100%;
+            padding: 0 30px;
+
+            &_title {
+                position: absolute;
+                z-index: 400;
+            }
+
+            &_stats {
+                position: absolute;
+                right: 30px;
+            }
+
+            h2 {
+                font-size: 16pt;
+                text-transform: uppercase;
+                font-weight: 600;
+            }
+
+            img {
+                height: 43px;
+            }
+        }
+    }
+
+    @media (max-width: 510px) {
+        height: 340px;
+        width: 100%;
+
+        .character-picker__stage {
+            height: 280px;
+            transition: 0.2s all;
+        }
+
+        .character-picker__characters {
+            height: 280px;
+            margin-left: calc(50% - 350px);
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            list-style: none;
+
+            li {
+                img {
+                    height: 250px;
+                    transition: 0.2s all ease-out;
+                }
+
+                &:nth-of-type(1) {
+                    .character-picker__characters__assassin {
+                        margin-left: 100px;
+                    }
+                    .character-picker__characters__gangster {
+                        margin-left: 140px;
+                    }
+                }
+                &:nth-of-type(3) {
+                    .character-picker__characters__entrepreneur {
+                        margin-left: 40px;
+                    }
+                    .character-picker__characters__gangster {
+                        margin-left: -10px;
+                    }
+                }
+
+                &:not(:nth-of-type(2)) {
+                    margin-bottom: 30px;
+
+                    img {
+                        cursor: pointer;
+                        opacity: 0.7;
+
+                        &:hover {
+                            transform: scale(1.05, 1.05);
+                        }
+                    }
+                }
+
+                &:nth-of-type(2) {
+                    left: 10px;
+                    bottom: 60px;
+
+                    img {
+                        height: 270px;
+                    }
+                }
+            }
+        }
+
+        &__gangster {
+            > .character-picker__stage {
+                background-size: cover;
+            }
+        }
+
+        &__assassin {
+            > .character-picker__stage {
+                background-size: cover;
+            }
+            .character-picker__characters {
+                li {
+                    &:nth-of-type(3) {
+                        .character-picker__characters__entrepreneur {
+                            margin-left: 110px;
+                        }
+                    }
+                }
+            }
+        }
+
+        &__entrepreneur {
+            > .character-picker__stage {
+                background-size: cover;
+            }
+        }
+
+        &__info-container {
+            position: relative;
+            z-index: 3;
+            height: 60px;
+        }
+
+        &__info {
+            position: absolute;
+            z-index: 3;
+
+            height: 40px;
+
+            width: 100%;
+            padding: 0 10px;
+
+            &_title {
+                position: absolute;
+                top: 10px;
+            }
+
+            &_stats {
+                position: absolute;
+                right: 10px;
+                top: 14px;
+            }
+
+            h2 {
+                font-size: 16pt;
+                text-transform: uppercase;
+                font-weight: 600;
+            }
+
+            img {
+                height: 30px;
+            }
+        }
+    }
+}
+
+.character-form {
+    padding-top: 12px;
+    text-align: center;
+
+    form {
+        padding-bottom: 12px;
+
+        p {
+            margin: 12px;
+            color: #c6ebf7;
+            font-size: 14px;
+        }
+    }
+}

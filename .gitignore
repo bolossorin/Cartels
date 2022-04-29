@@ -1,0 +1,6 @@
+# node
+node_modules/
+frontend/src/dist
+backend/src/build
+.idea/
+.DS_Store

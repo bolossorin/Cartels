@@ -1,0 +1,93 @@
+@import 'common';
+
+.percent-bar {
+  width: 100%;
+  height: 24px;
+  margin: 4px 0;
+  position: relative;
+  border-radius: 4px;
+
+  .filled-bar {
+    height: 100%;
+    position: absolute;
+    border-radius: 4px;
+  }
+
+  p {
+    position: absolute;
+    font-size: $font-size-xs;
+    line-height: 20px;
+    padding-left: 6px;
+    padding-top: 2px;
+    font-family: $font-accented-header;
+    color: $color-black;
+  }
+
+  p.percent-bar__label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    color: $color-white;
+  }
+
+  &--green {
+    background: #2f7615;
+
+    .filled-bar {
+      background: #42df1f;
+    }
+  }
+
+  &--blue {
+    background: #155776;
+
+    .filled-bar {
+      background: #1FA5DF;
+    }
+  }
+
+  &--red {
+    background: darken($color-red-alert, 20%);
+
+    .filled-bar {
+      background: $color-red-alert;
+    }
+  }
+
+  &--yellow {
+    background: darken(#FFC700, 20%);
+
+    p {
+      color: $color-black;
+    }
+
+    .filled-bar {
+      background: #FFC700;
+    }
+
+    p.percent-bar__label {
+      color: $color-black;
+    }
+  }
+
+  &--white {
+    background: #111111;
+    border: 2px #EEEEEE solid;
+    overflow: hidden;
+
+    p {
+      mix-blend-mode: difference;
+      font-family: $font-title;
+    }
+
+    .filled-bar {
+      background: #EEEEEE;
+      height: calc(100% + 2px);
+      top: -1px;
+      left: -1px;
+    }
+  }
+}

@@ -1,0 +1,247 @@
+@import "common";
+
+.garage-error-return {
+  margin-top: $padding-large;
+
+  button {
+    font-family: $font-title;
+  }
+}
+
+.garage {
+  position: relative;
+  padding: 0;
+  background: linear-gradient(to top, #040404 29%, transparent 80%), url('assets/images/garage-render.jpg');
+  background-size: auto auto, 1174px 761px;
+  background-position: left top, -200px -60px;
+  background-repeat: no-repeat, no-repeat;
+
+  &__content {
+    z-index: 2;
+    position: relative;
+    background: linear-gradient(to bottom, #00000088 10%, transparent 20%);
+    min-height: 880px;
+    padding: $padding-large;
+
+    &__title {
+      font-family: $font-accented-header;
+      font-size: $font-size-l;
+      margin-top: $padding-large;
+    }
+
+    &__class {
+      font-family: $font-title;
+      font-size: $font-size-xs;
+      margin-top: 4px;
+      color: $color-body-grey;
+    }
+
+    &__damage {
+      max-width: 50%;
+      margin-top: 8px;
+    }
+
+    &__controls {
+      > div {
+        margin: 12px 0;
+      }
+
+      .balance {
+        display: inline-block;
+        margin-left: 16px;
+
+        .text {
+          display: inline-block;
+        }
+      }
+
+      button {
+        width: auto;
+        font-size: $font-size-s;
+        font-family: $font-title;
+        padding: 2px 8px;
+      }
+    }
+
+    &__shipping {
+      .garage__content__image img {
+        filter: grayscale(1) brightness(0.05);
+      }
+    }
+
+    &__image {
+      position: relative;
+      margin-top: 42px;
+      text-align: center;
+
+      img {
+        max-height: 332px;
+        max-width: 100%;
+      }
+
+      &__shipping {
+        text-align: center;
+        width: 100%;
+        position: absolute;
+        left: 0;
+        top: 100px;
+        display: flex;
+        justify-content: center;
+
+        &__explainer {
+          margin-top: 38px;
+          width: fit-content;
+          text-align: left;
+          margin-left: $padding-med;
+
+          &__title {
+            font-family: $font-accented-header;
+            font-size: 20px;
+          }
+        }
+
+        .image img {
+          filter: brightness(0) invert(1) contrast(0.05);
+          height: 140px;
+        }
+      }
+    }
+
+    &__heat {
+      text-align: center;
+      margin-top: -25px;
+      position: relative;
+      z-index: 2;
+
+      &__title {
+        font-family: $font-accented-header;
+        font-size: $font-size-m;
+        text-transform: uppercase;
+      }
+
+      &__stars {
+        &__0-heat {
+          img {
+            opacity: 0.25;
+            filter: grayscale(1);
+          }
+        }
+
+        &__1-heat {
+          img:nth-child(n + 2) {
+            opacity: 0.25;
+            filter: grayscale(1);
+          }
+        }
+
+        &__2-heat {
+          img:nth-child(n + 3) {
+            opacity: 0.25;
+            filter: grayscale(1);
+          }
+        }
+
+        img {
+          margin: 4px;
+          max-height: 45px;
+        }
+      }
+    }
+
+    &__plate {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    &__cta {
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 32px;
+
+      > div {
+        width: 190px;
+      }
+
+      &__title {
+        font-family: $font-accented-header;
+        font-size: $font-size-s;
+        text-transform: uppercase;
+        text-align: center;
+        margin-bottom: 4px;
+      }
+
+      &__sell {
+        margin-left: $padding-med;
+
+        button {
+          font-family: $font-body-heavy;
+
+          .image {
+            filter: brightness(0);
+            display: inline-block;
+          }
+        }
+      }
+    }
+  }
+}
+
+.transport-modal {
+
+  @media (min-width: $breakpoint-desktop) {
+    max-width: 356px;
+    width: 100%;
+  }
+
+  .modal-inner {
+    background: #121212;
+    border-radius: 8px;
+    border: 1px $color-dividers solid;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 17px 35px;
+    color: $white-font;
+
+    h2 {
+      font-size: $font-size-m;
+      font-family: $font-title;
+    }
+
+    &__close {
+      cursor: pointer;
+    }
+  }
+
+  &__cities {
+    display: flex;
+    flex-direction: column;
+
+    &__city {
+      padding: 17px 35px;
+      color: $white-font;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.03);
+        cursor: pointer;
+      }
+
+      &--selected {
+        background: rgba(255, 255, 255, 0.04);
+      }
+    }
+  }
+
+  &__button {
+    padding: 10px 35px 35px;
+  }
+}

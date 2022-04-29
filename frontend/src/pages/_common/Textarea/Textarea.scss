@@ -1,0 +1,45 @@
+@import "common";
+
+.textarea-container {
+  margin-bottom: 16px;
+}
+
+.textarea {
+  position: relative;
+  width: 100%;
+
+  &__disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  textarea {
+    position: absolute;
+    width: 100%;
+    background: #0A0A0A;
+    text-align: left;
+    padding: $padding-med;
+    border-radius: 10px;
+    border: 1px solid #2e2d2e;
+    outline: none;
+    font-family: 'FuturaBook', sans-serif;
+    font-size: 16px;
+    resize: none;
+    color: $white-font;
+
+    &:focus {
+      border: 1px solid $white-font;
+    }
+  }
+
+  &__error {
+    textarea {
+      border: 1px solid #d43520;
+    }
+  }
+
+  &__error-text {
+    color: #d43520;
+    display: block;
+  }
+}

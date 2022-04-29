@@ -1,0 +1,15 @@
+@import '../../../../../styles/common';
+
+.image-card-box {
+    padding: 5px 0;
+    color: $white-font;
+    text-transform: uppercase;
+}
+
+.text--golden {
+    color: $gold-font;
+}
+
+.main-box__header {
+    @include contentBoxHeader;
+}

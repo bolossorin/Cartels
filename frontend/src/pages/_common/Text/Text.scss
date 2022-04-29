@@ -1,0 +1,97 @@
+@import "common";
+
+.content-text {
+  color: #fff;
+  font-family: 'FuturaBook', sans-serif;
+  font-size: 18px;
+
+  &__accentedHeader24 {
+    font-family: 'FuturaBoldOblique', sans-serif;
+    font-size: 24px;
+  }
+
+  &__title24 {
+    font-family: 'FuturaBold', sans-serif;
+    font-size: 24px;
+  }
+
+  &__title16 {
+    font-family: 'FuturaBold', sans-serif;
+    font-size: 16px;
+  }
+
+  &__title12 {
+    font-family: 'FuturaBold', sans-serif;
+    font-size: 12px;
+  }
+
+  &__title10 {
+    font-family: 'FuturaBold', sans-serif;
+    font-size: 10px;
+  }
+
+  &__body14 {
+    font-family: 'FuturaBook', sans-serif;
+    font-size: 14px;
+  }
+
+  &__italic {
+    font-family: 'FuturaOblique', sans-serif;
+  }
+
+  &__boldItalic {
+    font-family: 'FuturaBoldOblique', sans-serif;
+  }
+
+  &__medium {
+    font-size: 24px;
+  }
+
+  &__bodyGrey {
+    color: #bfbfbf;
+  }
+
+  &__annotationGrey {
+    color: #858585;
+  }
+
+  &__black {
+    color: #000;
+  }
+
+  &__red {
+    color: $color-red-alert;
+  }
+
+  &__yellow {
+    color: $color-gold-yellow;
+  }
+
+  &__green {
+    color: $color-cash-green;
+  }
+
+  &__cyan {
+    color: #18c7b3;
+  }
+
+  &__blue {
+    color: #1867c7;
+  }
+
+  &__lightBlue {
+    color: $color-cartels-blue;
+  }
+
+  &__purple {
+    color: #932aba;
+  }
+
+  &__pink {
+    color: #d09bfa;
+  }
+
+  &__lightBlue {
+    color: $font-light-blue;
+  }
+}

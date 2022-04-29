@@ -1,0 +1,29 @@
+@import '../../../../styles/common';
+
+.game-nav {
+    @include alternateColorList(
+        $alternate-color-darker,
+        $alternate-color-lighter
+    );
+
+    a {
+        @include leftSideBoxesPadding;
+        @include itemsListStyle;
+
+        height: 100%;
+        display: flex;
+        align-items: center;
+
+        span {
+            border: 1px solid #444444;
+            padding: 4px 0;
+            width: 42px;
+            text-align: center;
+            margin: 0 14px;
+            display: block;
+            border-radius: 4px;
+            color: #788e93;
+            background-color: rgba(0, 0, 0, 0.15);
+        }
+    }
+}

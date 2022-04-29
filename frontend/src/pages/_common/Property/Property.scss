@@ -1,0 +1,99 @@
+@import "common";
+
+.prop-owner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background: linear-gradient(to bottom, transparent, rgba(255, 121, 121, 0.06), transparent);
+
+  @media (max-width: $breakpoint-desktop) {
+    img {
+      max-width: 30%;
+    }
+  }
+
+  &__info {
+    width: 280px;
+    margin-left: 12px;
+
+    &__title {
+      font-family: $font-title-heavy;
+      font-size: $font-size-m;
+      border-bottom: 1px solid #ffffff22;
+      width: 100%;
+      display: block;
+      margin-bottom: 12px;
+      text-transform: capitalize;
+
+      @media (min-width: $breakpoint-desktop) {
+        font-size: $font-size-l;
+      }
+    }
+
+    &__max {
+      display: flex;
+      justify-content: start;
+      align-items: self-start;
+      color: $color-annotation-grey;
+
+      .balance {
+        margin-left: 6px;
+      }
+
+      .balance, img, div {
+        display: inline-block;
+        font-size: $font-size-s;
+      }
+    }
+
+    &__wealth {
+      display: flex;
+      justify-content: start;
+      align-items: self-start;
+      color: $color-annotation-grey;
+
+      span {
+        color: $color-cartels-blue;
+        margin-left: 6px;
+        font-family: $font-accented-header;
+      }
+    }
+
+    &__owner, &__crew {
+      display: flex;
+      justify-content: start;
+      align-items: center;
+      color: $color-annotation-grey;
+      margin-top: 12px;
+
+      .name-tag {
+        margin-left: 6px;
+      }
+
+      &__state {
+        img {
+          width: 32px;
+          height: 32px;
+          filter: invert(100%);
+          vertical-align: middle;
+          opacity: 0.95;
+          margin-right: 6px;
+        }
+
+        span {
+          color: $color-cartels-blue;
+          font-size: $font-size-xs;
+          border: 2px solid black;
+          padding: 6px 12px 2px;
+          border-radius: 6px;
+          background: linear-gradient(to bottom right, transparent, #00000055, transparent, #00000055, transparent);
+        }
+      }
+    }
+
+    &__crew {
+      margin-top: 6px;
+    }
+  }
+}

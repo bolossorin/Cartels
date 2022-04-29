@@ -1,0 +1,75 @@
+@import "common";
+
+.cooldown-container {
+    position: relative;
+}
+
+.cooldown-fade {
+    transition: 0.4s all;
+
+    &__active {
+        filter: grayscale(70%) brightness(20%);
+        pointer-events: none;
+    }
+
+    &__hidden {
+        filter: unset;
+    }
+}
+
+.cooldown-box {
+    transition: 0.4s all;
+    width: 450px;
+    height: 240px;
+    margin: auto;
+    z-index: 4;
+    position: absolute;
+    top: 75px;
+    left: calc(50% - 225px);
+    text-align: center;
+    //box-shadow: 0 0 14px rgba(0, 0, 0, 0.9);
+    background: radial-gradient(circle at center, $color-cartels-blue20, transparent, transparent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    &__jail {
+        background: radial-gradient(circle at center, $color-red-alert30, transparent, transparent);
+
+        .cooldown-box__ticker .timer {
+            color: $color-red-alert;
+        }
+    }
+
+    &__title {
+        text-transform: uppercase;
+        font-family: $font-title;
+        color: $color-white;
+    }
+
+    &__ticker {
+        color: $color-body-grey;
+
+        .timer {
+            color: $color-cartels-blue;
+            font-family: $font-title;
+            font-size: $font-size-xl;
+            padding: 0;
+        }
+
+    }
+
+    &__active {
+        opacity: 1;
+    }
+
+    &__hidden {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .timer-tag {
+        text-transform: uppercase;
+    }
+}

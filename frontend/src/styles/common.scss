@@ -1,0 +1,487 @@
+@import "colors";
+@import "fonts";
+
+$menu-button-top-color: #21252a;
+$menu-button-bottom-color: #19425a;
+
+$menu-button-border-right-top: #292e3534;
+$menu-button-border-right-bottom: #2052707e;
+
+$menu-button-border-left-top: #1b1f2234;
+$menu-button-border-left-bottom: #15364a7e;
+
+$ul-top-border: #2d32398e;
+$ul-bottom-border: #009bc88e;
+
+$headers-grey: #151a23;
+$headers-mobile-background: #161a23;
+
+$transparent-blue: rgba(25, 66, 90, 0.8);
+$transparent-black: rgba(33, 36, 41, 0.8);
+
+$transparent-black-darker: rgba(33, 36, 41, 0.95);
+$main-black: #212429;
+$yellow-border: #ffcc00;
+$dark-yellow-border: #46350c;
+$online-green: #00ff72;
+$font-dark-blue: #3286a6;
+$font-light-blue: #a8def0;
+
+$rank-background-top: #316074;
+$rank-background-bottom: #20475b;
+
+$green-health-empty: #164330;
+$green-health-filled: #0c884b;
+$green-health-font: #00cc66;
+
+$blue-armor-empty: #22343e;
+$blue-armor-filled: #2b667c;
+$blue-armor-font: #41b1da;
+
+$yellow-exp-empty: #413c1c;
+$yellow-exp-filled: #a1850e;
+$yellow-exp-font: #dcb000;
+
+$rank-font-color: #81aa94;
+
+$transparent-grey: rgba(33, 36, 41, 0.8);
+
+$dollar-font-color: #9cdfb8;
+$gold-font-color: #f0e7a8;
+$crypto-font-color: #d0a1e6;
+
+$grey-font: #8d8f91;
+
+$main-box-grey-dark: #31383f;
+$main-box-grey-light: #3a424b;
+
+$box-header-gradient-top: #1f252d;
+$box-header-gradient-bottom: #2c333e;
+$box-item-background-gradient-top: #1f232a;
+$box-item-background-gradient-bottom: #262b33;
+
+$white-font: #f1f1f1;
+$white-font-darker: #d3d3d3;
+$gold-font: #fff95d;
+$item-text-background: #2b333d;
+
+$low-difficulty-blue: #4491ae;
+$medium-difficulty-yellow: #f4af2e;
+$hard-difficulty-red: #f04a29;
+$very-hard-difficulty-purple: #ae43f0;
+
+$slider-grey: #9d9d9d;
+
+$bar-dark-blue: #40788f;
+$bar-light-blue: #89c9e2;
+$bar-text-blue: #c3e3f0;
+
+$xp-bar-full: #185f75;
+$xp-bar-empty: #0f3d4b;
+
+$alternate-color-darker: #161a23;
+$alternate-color-lighter: #1b202a;
+
+$forum-new-green: #94d2af;
+
+$breakpoint-desktop: 1150px;
+$breakpoint-intermediary: 700px;
+
+$mobile-side-gutter: 0;
+
+$blue-title-font: #c6ebf7;
+$blue-title-border: #26739e;
+
+$button-dark-blue: #2e4f62;
+$button-green: #42622e;
+$button-red: #622e2e;
+
+$mobile-side-panels-background-black: #212b37;
+
+$administrator-color: #4FA3D2;
+$moderator-color: #F4E661;
+
+* {
+    box-sizing: border-box;
+}
+
+@mixin contentBoxHeaderGradient {
+    background: linear-gradient(
+            180deg,
+            rgba(65, 67, 72, 0.4) 0%,
+            rgba(65, 67, 72, 0.4) 1.08%,
+            rgba(33, 36, 43, 0.4) 2.19%,
+            rgba(24, 66, 90, 0.4) 100%
+        ),
+        #1d2026;
+}
+
+@mixin contentBoxSubHeaderGradient {
+    background: linear-gradient(to bottom, #151a23, #293140), #151a23;
+}
+
+@mixin boxShadow($spread, $opacity) {
+    box-shadow: 0px 0px 27px $spread rgba(0, 0, 0, $opacity);
+}
+
+@mixin sideBoxesPadding {
+    padding: 0 20px;
+}
+
+@mixin leftSideBoxesPadding {
+    padding: 0 12px;
+}
+
+@mixin mainBoxesPadding {
+    padding: 0 70px;
+}
+
+@mixin itemsListFlex {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@mixin itemsListStyle {
+    color: $font-light-blue;
+    text-transform: uppercase;
+}
+
+@mixin alternateColorList($firstColor, $secondColor) {
+    li {
+        height: 38px;
+    }
+
+    li:nth-child(odd) {
+        background-color: $firstColor;
+
+        &:hover {
+            background-color: lighten($firstColor, 5%);
+        }
+    }
+    li:nth-child(even) {
+        background-color: $secondColor;
+
+        &:hover {
+            background-color: lighten($secondColor, 5%);
+        }
+    }
+}
+
+@mixin itemsListStyle {
+    color: $font-light-blue;
+    text-transform: uppercase;
+}
+
+@mixin headerStyles {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    background: #171115bf;
+    backdrop-filter: saturate(180%) blur(32px);
+    -webkit-backdrop-filter: saturate(180%) blur(32px);
+
+    @supports not (backdrop-filter: saturate(180%) blur(8px)) {
+        background: #171115bf;
+    }
+
+    img {
+        //opacity: 0.7;
+        mask-image: linear-gradient(to top, #666 40%, transparent 100%);
+    }
+
+    img,
+    p {
+        align-self: center;
+    }
+
+    p {
+        margin: 2px 0 0;
+        color: $color-white;
+        text-decoration: none;
+        text-transform: capitalize;
+        font-family: $font-title;
+        font-size: 13px;
+    }
+
+    &:hover {
+        background: #00a9e2;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+
+        p {
+            color: #000;
+        }
+
+        img {
+            filter: invert(0);
+            mask-image: none;
+        }
+    }
+}
+
+@mixin contentBoxHeader {
+    width: 100%;
+    height: 50px;
+    background-color: $headers-grey;
+    color: $font-light-blue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @media (max-width: $breakpoint-desktop) {
+        width: 100vw;
+        position: relative;
+        left: calc(-50vw + 50%);
+        height: 45px;
+        background: linear-gradient(
+                180deg,
+                rgba(65, 67, 72, 0.4) 0%,
+                rgba(65, 67, 72, 0.4) 1.08%,
+                rgba(33, 36, 43, 0.4) 2.19%,
+                rgba(24, 66, 90, 0.4) 100%
+            ),
+            #1d2026;
+        color: $blue-title-font;
+        border-bottom: solid;
+        border-color: $blue-title-border;
+        border-width: 2px;
+    }
+}
+
+@mixin contentSubBoxTitle {
+    width: 100%;
+    height: 40px;
+    background-color: $headers-grey;
+    color: $font-light-blue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    h2 {
+        text-transform: uppercase;
+        font-size: 15px;
+    }
+}
+
+@mixin leftRightPanelsMobile {
+    width: 100%;
+    max-width: 500px;
+    position: fixed;
+    top: 0%;
+    bottom: 0%;
+    z-index: 10;
+    display: flex;
+    transition: all 0.2s;
+    pointer-events: none;
+
+    .left-right-panel-mobile {
+        overflow-y: scroll;
+        height: 100%;
+        width: calc(100% - 34px);
+        background-color: $color-main-background;
+        border-radius: 0;
+        pointer-events: auto;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+
+    .pull-menu-arrow {
+        margin-top: 44vh;
+        width: 30px;
+        height: 52px;
+        display: block;
+        background-color: rgba(0, 0, 0, 0.2);
+        border-radius: 0 6px 6px 0;
+        pointer-events: auto;
+
+        img {
+            margin-top: 15px;
+            transition: 0.4s all;
+            transition-delay: 0.1s;
+        }
+    }
+
+    &__open {
+        transition: all 0.4s;
+        z-index: 14;
+
+        .left-right-panel-mobile {
+            box-shadow: 0px 0px 36px 10px rgba(0, 0, 0, 1);
+        }
+
+        .pull-menu-arrow {
+            box-shadow: none;
+            z-index: 15;
+        }
+    }
+
+    @media (min-width: $breakpoint-desktop) {
+        display: none;
+    }
+}
+
+@mixin sideBoxHeader($side, $twoItems) {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 38px;
+    text-transform: uppercase;
+    color: $font-light-blue;
+
+    @if ($side == right) {
+        justify-content: flex-start;
+    }
+    @if ($side == left) {
+        justify-content: flex-end;
+    }
+    @if ($twoItems == true) {
+        justify-content: space-between;
+    }
+
+    @media (max-width: $breakpoint-desktop) {
+        border-bottom: solid;
+        border-width: 2px;
+        border-color: $ul-bottom-border;
+    }
+}
+
+// margin, padding
+
+$padding-med: 8px;
+$padding-m: 16px;
+$padding-large: 32px;
+$content-padding: 25px;
+$content-padding-mobile: 16px;
+
+// common-content
+
+$article-background: #30383f;
+$article-alternate-background: #454c52;
+
+a.link-button-wrapper {
+    display: block;
+}
+
+main, .main {
+    h1 {
+        @include contentBoxHeaderGradient;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 45px;
+        width: 100%;
+        color: $blue-title-font;
+        text-transform: uppercase;
+        border-bottom: 2px solid rgba(38, 115, 158, 0.3);
+        font-size: 18px;
+        font-family: 'FuturaHeading', sans-serif !important;
+
+        @media (max-width: $breakpoint-desktop) {
+            background: linear-gradient(
+                    180deg,
+                    rgba(65, 67, 72, 0.4) 0%,
+                    rgba(65, 67, 72, 0.4) 1.08%,
+                    rgba(33, 36, 43, 0.4) 2.19%,
+                    rgba(24, 66, 90, 0.4) 100%
+                ),
+                #1d2026;
+            border-bottom: solid;
+            border-color: $blue-title-border;
+            border-width: 2px;
+        }
+    }
+
+    h2 {
+        @extend h1;
+        @include contentBoxSubHeaderGradient;
+
+        position: static;
+        width: 100%;
+        height: unset;
+        padding: 12px;
+        font-family: 'FuturaBook', sans-serif !important;
+        font-size: 16px;
+        text-transform: uppercase;
+        border-bottom: 1px solid #1c2126;
+    }
+
+    article {
+        background-color: $article-background;
+        width: 100%;
+        min-height: 45px;
+        color: $white-font;
+        font-family: 'FuturaBook', sans-serif;
+    }
+}
+
+
+.side-title {
+    margin: 24px 0 8px;
+    font-family: $font-title;
+    font-size: $font-size-s;
+}
+
+
+
+@mixin bigButton($color) {
+    height: 60px;
+    width: 100%;
+    color: $white-font-darker;
+    padding: 0;
+    border: none;
+    background-color: $color;
+    font-size: 30px;
+    text-transform: uppercase;
+    cursor: pointer;
+
+    &:hover {
+        filter: brightness(130%);
+    }
+
+    @media (max-width: $breakpoint-desktop) {
+        font-size: 20px;
+    }
+}
+
+input {
+    height: 50px;
+    background: #212830;
+    width: 100%;
+    border: none;
+    text-align: center;
+    color: $white-font-darker;
+    font-size: 14pt;
+
+    &::placeholder {
+        color: #71757f;
+    }
+    &.input__search-bar {
+        border-radius: 2em;
+        background-color: #FFFFFF20;
+        text-align: left;
+        padding-left: 1em;
+    }
+}
+
+@mixin closeModalCross {
+    cursor: pointer;
+    transition: 0.2s all;
+
+    &:hover {
+        transform: scale(1.2);
+    }
+}
+
+.content-padding {
+    padding: $content-padding;
+
+    @media (max-width: $breakpoint-intermediary) {
+        padding: $content-padding-mobile;
+    }
+}

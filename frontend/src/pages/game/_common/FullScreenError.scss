@@ -1,0 +1,47 @@
+@import '../../../styles/common';
+
+.error-icon {
+    &__image {
+        //animation: star-spin 3s infinite;
+        width: 80px;
+        opacity: 0.9;
+    }
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+
+    p {
+        padding-left: 12px;
+        color: $white-font-darker;
+
+        strong {
+            display: block;
+            font-size: 24px;
+            color: #d04840;
+        }
+    }
+
+    &.integrated-loader {
+        width: 100%;
+        height: 100px;
+    }
+}
+
+.error-return {
+    display: block;
+    height: 30px;
+    font-family: 'FuturaBook', sans-serif;
+    color: #d3d3d3;
+    border: none;
+    background-color: #572525;
+    font-size: 18px;
+    cursor: pointer;
+    margin-top: 8px;
+    padding: 0 32px;
+
+    &:hover {
+        filter: brightness(130%);
+    }
+}

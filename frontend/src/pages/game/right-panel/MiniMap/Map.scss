@@ -1,0 +1,63 @@
+@import '../../../../styles/common';
+
+.map-box {
+    display: block;
+
+    .map-box__header {
+        @include contentBoxHeaderGradient;
+        @include leftSideBoxesPadding;
+        @include sideBoxHeader(left, true);
+
+        .map-box__header__location {
+            display: flex;
+            align-items: center;
+
+            img {
+                margin-left: 13px;
+            }
+        }
+    }
+    .map-container {
+        width: 100%;
+        background: url('../../../../assets/images/map/mini-def.svg');
+        background-size: cover !important;
+        display: flex;
+        justify-content: end;
+
+        &:after {
+            padding-top: 67.95%;
+            display: block;
+            content: '';
+        }
+
+        p {
+            align-self: end;
+            justify-self: baseline;
+            padding: 8px;
+            color: $font-light-blue;
+            text-shadow: 0 4px 14px #000;
+            font-family: 'FuturaBook', sans-serif;
+            opacity: 0.65;
+        }
+
+        &__sol-furioso {
+            background: url('../../../../assets/images/map/mini-SF.svg');
+        }
+
+        &__marshall-city {
+            background: url('../../../../assets/images/map/mini-MC.svg');
+        }
+
+        &__dirtlands {
+            background: url('../../../../assets/images/map/mini-DL.svg');
+        }
+
+        &__valencia-hills {
+            background: url('../../../../assets/images/map/mini-VH.svg');
+        }
+
+        &__park-city {
+            background: url('../../../../assets/images/map/mini-PC.svg');
+        }
+    }
+}

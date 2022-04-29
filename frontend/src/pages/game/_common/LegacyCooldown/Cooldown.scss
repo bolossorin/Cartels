@@ -1,0 +1,49 @@
+.cooldown-container {
+    position: relative;
+}
+
+.cooldown-fade {
+    transition: 0.4s all;
+
+    &__active {
+        filter: blur(2px) grayscale(30%) brightness(50%);
+        pointer-events: none;
+    }
+
+    &__hidden {
+        filter: unset;
+    }
+}
+
+.cooldown-box {
+    transition: 0.4s all;
+    width: 350px;
+    margin: auto;
+    z-index: 4;
+    position: absolute;
+    top: 75px;
+    left: calc(50% - 175px);
+    text-align: center;
+    box-shadow: 0 0 14px rgba(0, 0, 0, 0.9);
+
+    article {
+        padding: 24px;
+    }
+
+    &__active {
+        opacity: 1;
+    }
+
+    &__hidden {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .timer {
+        font-size: 30px;
+    }
+
+    .timer-tag {
+        text-transform: uppercase;
+    }
+}

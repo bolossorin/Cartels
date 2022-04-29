@@ -1,0 +1,106 @@
+---
+
+version: '3'
+
+networks:
+  redis:
+  postgres:
+  application:
+  php-fpm:
+    internal: true
+
+volumes:
+  redis:
+  postgres:
+
+services:
+
+  redis:
+    image: redis:6-buster
+    restart: always
+    volumes:
+      - ./redis/redis.conf:/usr/local/etc/redis/redis.conf:ro
+      - redis:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "-h", "localhost", "ping"]
+      interval: 5s
+      timeout: 5s
+    networks:
+      - redis
+
+  postgres:
+    image: postgres:11-alpine
+    restart: always
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_USER=${POSTGRES_USERNAME}
+      - POSTGRES_DB=${POSTGRES_DATABASE}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USERNAME}"]
+      interval: 5s
+      timeout: 5s
+    networks:
+      - postgres
+
+  frontend:
+    depends_on:
+      - redis
+      - postgres
+    build:
+      context: ..
+      dockerfile: docker/frontend/Dockerfile
+    restart: always
+    environment:
+      - NODE_ENV=${NODE_ENV}
+      - REDIS_HOSTNAME=${REDIS_HOSTNAME}
+      - POSTGRES_HOSTNAME=${POSTGRES_HOSTNAME}
+      - POSTGRES_DATABASE=${POSTGRES_DATABASE}
+      - POSTGRES_USERNAME=${POSTGRES_USERNAME}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - AWS_HOSTNAME=${AWS_HOSTNAME}
+    networks:
+      - postgres
+      - redis
+      - application
+
+  backend:
+    depends_on:
+      - redis
+      - postgres
+    build:
+      context: ..
+      dockerfile: docker/backend/Dockerfile
+    restart: always
+    environment:
+      - NODE_ENV=${NODE_ENV}
+      - REDIS_HOSTNAME=${REDIS_HOSTNAME}
+      - POSTGRES_HOSTNAME=${POSTGRES_HOSTNAME}
+      - POSTGRES_DATABASE=${POSTGRES_DATABASE}
+      - POSTGRES_USERNAME=${POSTGRES_USERNAME}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - AWS_HOSTNAME=${AWS_HOSTNAME}
+    networks:
+      - postgres
+      - redis
+      - application
+      - php-fpm
+
+  php:
+    depends_on:
+      - backend
+    build:
+      context: ..
+      dockerfile: docker/php/Dockerfile
+    restart: always
+    networks:
+      - php-fpm
+
+  aws:
+    image: localstack/localstack:0.12.18
+    networks:
+      - application
+    environment:
+      - DEFAULT_REGION=us-east-1
+      - SERVICES=sqs,s3

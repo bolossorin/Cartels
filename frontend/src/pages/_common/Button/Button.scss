@@ -1,0 +1,182 @@
+@import 'common';
+
+.rounded-button {
+  width: 100%;
+  flex-grow: 1;
+  height: 100%;
+  padding: $padding-med;
+  border-radius: 8px;
+  border: none;
+  color: black;
+  cursor: pointer;
+  min-width: 105px;
+  font-size: 14pt;
+  transition: 0.2s all;
+  font-family: $font-title;
+
+  &:disabled {
+    box-shadow: inset 0 0 24px rgba(0, 0, 0, 0.48);
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &__primary-white {
+    background: $white-font-darker;
+
+    &:hover {
+      background: $white-font;
+    }
+  }
+  &__primary-darkGrey {
+    background: #414041;
+    color: $white-font-darker;
+
+    &:hover {
+      background: #525151;
+    }
+  }
+  &__primary-grey {
+    background: #858485;
+
+    &:hover {
+      background: #979697;
+    }
+  }
+  &__primary-red {
+    background: #af2e1c;
+
+    &:hover {
+      background: #D13722;
+    }
+  }
+  &__primary-blue {
+    background: #00B3FF;
+
+    &:hover {
+      background: #34C3FF;
+    }
+  }
+  &__primary-green {
+    background: #15c059;
+
+    &:hover {
+      background: #3dc071;
+    }
+  }
+  &__primary-yellow {
+    background: #FFC700;
+
+    &:hover {
+      background: #ffd442;
+    }
+  }
+  &__primary-purple {
+    background: $color-ultra-rare;
+
+    &:hover {
+      background: #8b60e6;
+    }
+  }
+
+  &__secondary-white {
+    background: rgba(255, 255, 255, 0.1);
+    color: $white-font-darker;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+  }
+  &__secondary-red {
+    background: rgba(175, 46, 28, 0.1);
+    color: #AF2E1C;
+
+    &:hover {
+      background: rgba(175, 46, 28, 0.15);
+    }
+  }
+  &__secondary-blue {
+    background: rgba(0, 179, 255, 0.1);
+    color: #00B3FF;
+
+    &:hover {
+      background: rgba(0, 179, 255, 0.15);
+    }
+  }
+  &__secondary-green {
+    background: rgba(8, 255, 0, 0.1);
+    color: $color-cash-green;
+
+    &:hover {
+      background: rgba(47, 255, 0, 0.15);
+    }
+  }
+
+  &__tertiary-white {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid $white-font-darker;
+    color: $color-white;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+  }
+
+  &__quaternary-white {
+    background: rgba(255, 255, 255, 0);
+    color: $white-font-darker;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+  }
+
+  &__tertiary-red {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid #e9aeae;
+    color: #db6c6c;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+  }
+
+  &__tertiary-blue {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid #00A4FF00;
+    color: $color-white;
+
+    &:hover {
+      background: rgba(0, 164, 255, 0.18);
+      border: 1px solid #00A4FF;
+    }
+  }
+
+  &__loading {
+    position: relative;
+    overflow: hidden;
+    display: block;
+    //animation: 2s button-load-swoosh infinite;
+
+    &:after {
+      content: ' ';
+      position: absolute;
+      top: -50%;
+      right: -60%;
+      bottom: -50%;
+      left: -60%;
+      background: linear-gradient(rgba(255,255,255,0) 20%, rgba(255,255,255,.5) 50%, rgba(255,255,255,0)) 80%;
+      transform: rotate(70deg) translate(0, 10em);
+      animation: 1.45s button-load-swoosh infinite;
+      display: block;
+    }
+    //&:hover:after {
+    //  display: block;
+    //  animation: button-load-swoosh 0.75s ease-out;
+    //}
+  }
+}
+
+@keyframes button-load-swoosh {
+  from { transform: rotate(70deg) translate(0, 10em); }
+  to { transform: rotate(70deg) translate(0, -9em); }
+}

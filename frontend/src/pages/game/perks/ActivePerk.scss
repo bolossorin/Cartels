@@ -1,0 +1,17 @@
+@import "common";
+
+.active-perk {
+  width: 48px;
+
+  img {
+    height: 48px;
+    width: 48px;
+  }
+
+  &__ticker {
+    color: $color-body-grey;
+    font-family: $font-body-heavy;
+    font-size: $font-size-xxs;
+    text-align: center;
+  }
+}

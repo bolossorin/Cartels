@@ -1,0 +1,34 @@
+@import "common";
+
+.game-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  padding-bottom: 70px;
+
+  .codeorder {
+    display: flex;
+    align-items: center;
+    font-size: $font-size-l;
+    color: $color-white;
+    font-family: $font-accented-header;
+    margin-bottom: 8px;
+
+    img {
+      height: 26px;
+      filter: brightness(130);
+      margin-right: 5px;
+    }
+  }
+
+    span {
+      opacity: 0.75;
+      color: $color-annotation-grey;
+    }
+
+  p {
+    opacity: 0.6;
+    color: $color-annotation-grey;
+  }
+}

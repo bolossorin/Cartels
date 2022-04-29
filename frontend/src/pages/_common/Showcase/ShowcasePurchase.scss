@@ -1,0 +1,70 @@
+@import "common";
+
+.showcase-purchase {
+  flex-grow: 1;
+  //border: 1px solid red;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  &__currency {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    height: 40px;
+    margin-top: 40px;
+
+    @media (min-width: $breakpoint-desktop) {
+      margin: 0;
+    }
+
+    &__icons {
+      &__disabled {
+        filter: grayscale(80%);
+        opacity: 0.5;
+      }
+
+      img, .image {
+        height: 28px;
+        display: inline-block;
+        margin-right: 6px;
+      }
+
+      img {
+        //opacity: 0.65;
+        cursor: pointer;
+
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+
+    > .context-text {
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  &__cta {
+    padding-top: $padding-med;
+
+    > button > div {
+      font-size: $font-size-l;
+      font-family: $font-accented-header;
+    }
+
+    .image {
+      display: inline-block;
+
+      img {
+        filter: brightness(0);
+        height: 26px;
+        vertical-align: sub;
+      }
+    }
+  }
+}

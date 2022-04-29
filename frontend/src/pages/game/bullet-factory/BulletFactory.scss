@@ -1,0 +1,132 @@
+@import 'common';
+
+.bullet-factory {
+  position: relative;
+
+  .background {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 50px + $padding-large;
+    -webkit-mask-image: linear-gradient(to bottom, black 10%, transparent 90%);
+    mask-image: linear-gradient(to bottom, black 10%, transparent 90%);
+    user-select: none;
+    user-drag: none;
+    z-index: 1;
+  }
+
+  &__owner {
+    margin-top: $padding-large;
+    position: relative;
+    z-index: 2;
+
+    p {
+      display: flex;
+
+      span, a {
+        margin-left: 5px;
+      }
+    }
+  }
+
+  &__info {
+    position: relative;
+    margin: auto;
+    z-index: 2;
+    margin-top: 150px;
+    max-width: 386px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &__time {
+      font-size: $font-size-m;
+      text-shadow: 2px 2px 4px #000000;
+
+      span {
+        font-family: $font-accented-header;
+      }
+    }
+
+    &__stock {
+      width: 100%;
+      height: 36px;
+      margin: $padding-med 0;
+      background: linear-gradient(to right, $color-cartels-blue10 0%, $color-cartels-blue20 50%, $color-cartels-blue10 100%  );
+      color: $color-cartels-blue;
+      font-size: $font-size-xl;
+      font-family: $font-accented-header;
+      line-height: 36px;
+      text-align: center;
+
+      &--empty {
+        background: linear-gradient(to right, $color-red-alert10 0%, $color-red-alert20 50%, $color-red-alert10 100%  );
+        color: $color-red-alert;
+      }
+    }
+
+    &__cost {
+      color: #00B3FF;
+      font-size: $font-size-m;
+      margin-bottom: $padding-med;
+    }
+
+    &__rate {
+      margin-bottom: $padding-med;
+    }
+
+    &__purchase-form {
+      max-width: 186px;
+      width: 100%;
+
+      .input__image {
+        img {
+          padding: 5px;
+        }
+      }
+    }
+  }
+
+  &__factories {
+    width: 100%;
+    margin-top: $padding-large;
+
+    &__header {
+      background: #171717;
+      height: 36px;
+
+      th {
+        vertical-align: middle;
+      }
+    }
+
+    &__factory {
+      height: 71px;
+
+      &:nth-of-type(2n) {
+        background: $color-items;
+      }
+
+      &--selected {
+        background: rgba(0, 179, 255, 0.24) !important;
+
+      }
+
+      td {
+        text-align: center;
+        vertical-align: middle;
+        font-size: $font-size-s;
+        font-family: $font-accented-header;
+
+        .name-tag {
+          justify-content: center;
+        }
+
+        &.out-of-stock {
+          color: $color-red-alert;
+        }
+      }
+    }
+  }
+
+}

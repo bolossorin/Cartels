@@ -1,0 +1,29 @@
+{
+  "presets": [
+    "@babel/typescript",
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "node": "current"
+        }
+      }
+    ]
+  ],
+  "plugins": [
+    [
+      "@babel/plugin-proposal-decorators",
+      {
+        "decoratorsBeforeExport": true
+      }
+    ],
+    "@babel/proposal-object-rest-spread",
+    "@babel/plugin-syntax-top-level-await",
+    [
+      "@babel/proposal-class-properties",
+      {
+        "spec": true
+      }
+    ]
+  ]
+}

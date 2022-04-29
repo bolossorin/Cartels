@@ -1,0 +1,62 @@
+[
+  {
+    "ParameterKey": "Environment",
+    "ParameterValue": "Staging"
+  },
+  {
+    "ParameterKey": "WebsiteFQDN",
+    "ParameterValue": "brinkofwar.codeorder.com"
+  },
+  {
+    "ParameterKey": "BucketName",
+    "ParameterValue": "brinkofwar-frontend"
+  },
+  {
+    "ParameterKey": "ACMCertArn",
+    "ParameterValue": "arn:aws:acm:us-east-1:925000790351:certificate/2e117cb5-a6e2-49a6-8942-90127d8ec5bc"
+  },
+  {
+    "ParameterKey": "Route53HostedZoneID",
+    "ParameterValue": "Z2MVGBDQ2S0JTO"
+  },
+  {
+    "ParameterKey": "ServiceName",
+    "ParameterValue": "brinkofwar"
+  },
+  {
+    "ParameterKey": "BackendImage",
+    "ParameterValue": "925000790351.dkr.ecr.us-east-1.amazonaws.com/brinkofwar-backend"
+  },
+ {
+    "ParameterKey": "BackendPHPImage",
+    "ParameterValue": "925000790351.dkr.ecr.us-east-1.amazonaws.com/brinkofwar-php"
+  },
+  {
+    "ParameterKey": "ECSTaskCpu",
+    "ParameterValue": "512"
+  },
+  {
+    "ParameterKey": "ECSTaskMemory",
+    "ParameterValue": "1GB"
+  },
+  {
+    "ParameterKey": "VPCID",
+    "ParameterValue": "vpc-0292fa0f9e737534e"
+  },
+  {
+    "ParameterKey": "Subnets",
+    "ParameterValue": "subnet-047b718e65c5e90b6,subnet-094529d0255af2386,subnet-0d6b5f759e4842183"
+  },
+  {
+    "ParameterKey": "ContainerPort",
+    "ParameterValue": "8080"
+  },
+  {
+    "ParameterKey": "Version",
+    "ParameterValue": "staging-latest"
+  },
+  {
+    "ParameterKey": "VPCDefaultSG",
+    "ParameterValue": "sg-051ab72bae86de773"
+  }
+]

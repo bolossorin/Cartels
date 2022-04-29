@@ -1,0 +1,319 @@
+---
+
+stages:
+  - test yaml syntax
+  - build frontend staging
+  - deploy frontend staging
+  - build backend staging
+  - deploy backend staging
+  # - cleanup backend staging
+  - build frontend prod
+  - deploy frontend prod
+  - build backend prod
+  - deploy backend prod
+  - cleanup backend prod
+
+variables:
+  YAMLLINT_VERSION: 1.15.0
+  DOCKER_REGISTRY_BASE_URL: 925000790351.dkr.ecr.us-east-1.amazonaws.com # This is specific to your AWS Account
+  AWS_REGION: us-east-1
+  DOMAIN_SUFFIX: brinkofwar.codeorder.com # Check parameters.json
+  ## Environment specific variables
+  # Staging
+  CFN_STACK_NAME_STAGING: brinkofwarStaging # Check CloudFormation - must run CFN first
+  S3_BUCKET_NAME_STAGING: staging-brinkofwar-frontend # Check parameters.json
+  DISTRIBUTION_ID_STAGING: E3ED0URFENT8HH # Check CloudFormation resource after created
+  # Prod
+  CFN_STACK_NAME_PROD: brinkofwarProd # Check CloudFormation - must run CFN first
+  S3_BUCKET_NAME_PROD: prod-brinkofwar-frontend # Check parameters.json
+  DISTRIBUTION_ID_PROD: E330XJ9WDQ58NS # Check CloudFormation resource after created
+
+yamllint:
+  stage: test yaml syntax
+  image: python:3-alpine
+  script:
+    - pip install yamllint==${YAMLLINT_VERSION}
+    - yamllint -d "{rules:{}}" .
+
+##
+## Staging
+##
+
+#
+# Frontend
+#
+
+build frontend staging:
+  stage: build frontend staging
+  image: node:14-alpine
+  script:
+    - cd frontend/src/
+    - yarn install
+    - yarn run build
+    - echo "BUILD SUCCESSFULLY"
+  artifacts:
+    paths:
+      - frontend/src/dist/
+    expire_in: 20 mins
+  only:
+    refs:
+      - testing
+    changes:
+      - frontend/**/*    # Only build when files in frontend folder is modified
+
+deploy frontend staging:
+  stage: deploy frontend staging
+  image: python:3-alpine
+  dependencies:
+    - build frontend staging
+  script:
+    - cd frontend/src/
+    - export S3_BUCKET_NAME_STAGING=$S3_BUCKET_NAME_STAGING
+    - export DISTRIBUTION_ID_STAGING=$DISTRIBUTION_ID_STAGING
+    - pip install awscli --upgrade --user
+    - export PATH=~/.local/bin:$PATH
+    - aws s3 sync dist/ s3://$S3_BUCKET_NAME_STAGING/
+    - aws cloudfront create-invalidation --distribution-id $DISTRIBUTION_ID_STAGING --paths '/*'
+    - echo "DEPLOYED SUCCESSFULLY"
+  only:
+    refs:
+      - testing
+    changes:
+      - frontend/**/*    # Only build when files in frontend folder is modified
+
+#
+# Backend
+#
+
+build backend staging:
+  stage: build backend staging
+  only:
+    refs:
+      - testing
+      # - tags
+      # - merge_requests
+    changes:
+      - backend/**/*
+      - php/**/*
+      - docker/**/*
+      - scripts/**/*
+  image: docker:18
+  variables:
+    DOCKER_HOST: tcp://docker:2375/
+    DOCKER_DRIVER: overlay2
+  services:
+    - docker:19.03.5-dind
+  before_script:
+    - apk add git python py-pip
+    - pip install awscli
+    - eval $(aws ecr get-login --no-include-email --region ${AWS_REGION})
+    - ./scripts/version.sh
+  script:
+    - scripts/version.sh
+    - docker build -t brinkofwar-backend:latest -f docker/backend/Dockerfile .
+    - docker build -t brinkofwar-php:latest -f docker/php/Dockerfile .
+    - docker tag brinkofwar-backend:latest ${DOCKER_REGISTRY_BASE_URL}/brinkofwar-backend:staging-latest
+    - docker tag brinkofwar-php:latest ${DOCKER_REGISTRY_BASE_URL}/brinkofwar-php:staging-latest
+    - docker tag brinkofwar-backend:latest ${DOCKER_REGISTRY_BASE_URL}/brinkofwar-backend:staging-$(cat version)
+    - docker tag brinkofwar-php:latest ${DOCKER_REGISTRY_BASE_URL}/brinkofwar-php:staging-$(cat version)
+    - docker push ${DOCKER_REGISTRY_BASE_URL}/brinkofwar-backend:staging-latest
+    - docker push ${DOCKER_REGISTRY_BASE_URL}/brinkofwar-php:staging-latest
+    - docker push ${DOCKER_REGISTRY_BASE_URL}/brinkofwar-backend:staging-$(cat version)
+    - docker push ${DOCKER_REGISTRY_BASE_URL}/brinkofwar-php:staging-$(cat version)
+
+deploy backend staging:
+  stage: deploy backend staging
+  dependencies:
+    - build backend staging
+  only:
+    refs:
+      - testing
+      # - tags
+      # - merge_requests
+    changes:
+      - backend/**/*
+      - php/**/*
+      - docker/**/*
+      - scripts/**/*
+  image: docker:19.03.10
+  services:
+    - docker:19.03.5-dind
+  environment:
+    name: staging
+    url: https://staging.${DOMAIN_SUFFIX}
+  before_script:
+    - apk add --no-cache py-pip python-dev libffi-dev openssl-dev gcc libc-dev make git
+    - pip install awscli
+  script:
+    - scripts/version.sh
+    - export VERSION=$(cat version)
+    - sed -i "s/\"staging-latest\"/\"staging-$VERSION\"/" cloudformation/parametersStaging.json
+    - aws cloudformation update-stack --stack-name ${CFN_STACK_NAME_STAGING} --template-body file://cloudformation/brinkofwar.yml --parameters file://cloudformation/parametersStaging.json --capabilities CAPABILITY_NAMED_IAM CAPABILITY_IAM --region ${AWS_REGION}
+    # - timeout 15m aws cloudformation wait stack-update-complete --stack-name ${CFN_STACK_NAME_STAGING} --region ${AWS_REGION}
+
+# cleanup failed staging deployment:
+#   stage: cleanup backend staging
+#   only:
+#     refs:
+#       - testing
+#       # - tags
+#       # - merge_requests
+#     changes:
+#       - backend/**/*
+#       - php/**/*
+#       - docker/**/*
+#       - scripts/**/*
+#   when: on_failure
+#   image: docker:stable
+#   services:
+#     - docker:19.03.5-dind
+#   except:
+#     refs:
+#       - master
+#   before_script:
+#     - apk add --no-cache py-pip python-dev libffi-dev openssl-dev gcc libc-dev make git
+#     - pip install awscli
+#   script:
+#     - aws cloudformation cancel-update-stack --stack-name ${CFN_STACK_NAME_STAGING} --region ${AWS_REGION}
+
+
+##
+## Production
+##
+
+#
+# Frontend
+#
+
+build frontend prod:
+  stage: build frontend prod
+  image: node:14-alpine
+  script:
+    - cd frontend/src/
+    - yarn install
+    - yarn run build
+    - echo "BUILD SUCCESSFULLY"
+  artifacts:
+    paths:
+      - frontend/src/dist/
+    expire_in: 20 mins
+  only:
+    refs:
+      - master
+    changes:
+      - frontend/**/*    # Only build when files in frontend folder is modified
+
+deploy frontend prod:
+  stage: deploy frontend prod
+  image: python:3-alpine
+  dependencies:
+    - build frontend prod
+  script:
+    - cd frontend/src/
+    - export S3_BUCKET_NAME_PROD=$S3_BUCKET_NAME_PROD
+    - export DISTRIBUTION_ID_PROD=$DISTRIBUTION_ID_PROD
+    - pip install awscli --upgrade --user
+    - export PATH=~/.local/bin:$PATH
+    - aws s3 sync dist/ s3://$S3_BUCKET_NAME_PROD/
+    - aws cloudfront create-invalidation --distribution-id $DISTRIBUTION_ID_PROD --paths '/*'
+    - echo "DEPLOYED SUCCESSFULLY"
+  only:
+    refs:
+      - master
+    changes:
+      - frontend/**/*    # Only build when files in frontend folder is modified
+
+#
+# Backend
+#
+
+build backend prod:
+  stage: build backend prod
+  only:
+    refs:
+      - master
+      # - tags
+      # - merge_requests
+    changes:
+      - backend/**/*
+      - php/**/*
+      - docker/**/*
+      - scripts/**/*
+  image: docker:18
+  variables:
+    DOCKER_HOST: tcp://docker:2375/
+    DOCKER_DRIVER: overlay2
+  services:
+    - docker:19.03.5-dind
+  before_script:
+    - apk add git python py-pip
+    - pip install awscli
+    - eval $(aws ecr get-login --no-include-email --region ${AWS_REGION})
+    - ./scripts/version.sh
+  script:
+    - scripts/version.sh
+    - docker build -t brinkofwar-backend:latest -f docker/backend/Dockerfile .
+    - docker build -t brinkofwar-php:latest -f docker/php/Dockerfile .
+    - docker tag brinkofwar-backend:latest ${DOCKER_REGISTRY_BASE_URL}/brinkofwar-backend:latest
+    - docker tag brinkofwar-php:latest ${DOCKER_REGISTRY_BASE_URL}/brinkofwar-php:latest
+    - docker tag brinkofwar-backend:latest ${DOCKER_REGISTRY_BASE_URL}/brinkofwar-backend:$(cat version)
+    - docker tag brinkofwar-php:latest ${DOCKER_REGISTRY_BASE_URL}/brinkofwar-php:$(cat version)
+    - docker push ${DOCKER_REGISTRY_BASE_URL}/brinkofwar-backend:latest
+    - docker push ${DOCKER_REGISTRY_BASE_URL}/brinkofwar-php:latest
+    - docker push ${DOCKER_REGISTRY_BASE_URL}/brinkofwar-backend:$(cat version)
+    - docker push ${DOCKER_REGISTRY_BASE_URL}/brinkofwar-php:$(cat version)
+
+deploy backend prod:
+  stage: deploy backend prod
+  dependencies:
+    - build backend prod
+  only:
+    refs:
+      - master
+      # - tags
+      # - merge_requests
+    changes:
+      - backend/**/*
+      - php/**/*
+      - docker/**/*
+      - scripts/**/*
+  image: docker:19.03.10
+  services:
+    - docker:19.03.5-dind
+  environment:
+    name: staging
+    url: https://staging.${DOMAIN_SUFFIX}
+  before_script:
+    - apk add --no-cache py-pip python-dev libffi-dev openssl-dev gcc libc-dev make git
+    - pip install awscli
+  script:
+    - scripts/version.sh
+    - export VERSION=$(cat version)
+    - sed -i "s/\"latest\"/\"$VERSION\"/" cloudformation/parametersProd.json
+    - aws cloudformation update-stack --stack-name ${CFN_STACK_NAME_PROD} --template-body file://cloudformation/brinkofwar.yml --parameters file://cloudformation/parametersProd.json --capabilities CAPABILITY_NAMED_IAM CAPABILITY_IAM --region ${AWS_REGION}
+#     - timeout 15m aws cloudformation wait stack-update-complete --stack-name ${CFN_STACK_NAME_PROD} --region ${AWS_REGION}
+
+# cleanup failed staging deployment:
+#   stage: cleanup backend prod
+#   only:
+#     refs:
+#       - master
+#       # - tags
+#       # - merge_requests
+#     changes:
+#       - backend/**/*
+#       - php/**/*
+#       - docker/**/*
+#       - scripts/**/*
+#   when: on_failure
+#   image: docker:stable
+#   services:
+#     - docker:19.03.5-dind
+#   except:
+#     refs:
+#       - master
+#   before_script:
+#     - apk add --no-cache py-pip python-dev libffi-dev openssl-dev gcc libc-dev make git
+#     - pip install awscli
+#   script:
+#     - aws cloudformation cancel-update-stack --stack-name ${CFN_STACK_NAME_PROD} --region ${AWS_REGION}

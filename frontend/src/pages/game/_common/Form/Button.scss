@@ -1,0 +1,53 @@
+form .form__button {
+    cursor: pointer;
+    font-size: 22px;
+    padding: 12px;
+    background: #1d4d68;
+    border: 0;
+    color: #c6ebf7;
+    text-align: center;
+    transition: background 0.2s ease-in-out;
+
+    &:disabled {
+        background: #1d4d6837;
+        color: rgba(113, 134, 141, 0.7);
+        cursor: not-allowed;
+    }
+
+    &__loading {
+        background: repeating-linear-gradient(
+            to right,
+            #1d4d6866 0%,
+            #1d4d6866 56%,
+            #c6ebf745 60%,
+            #1d4d6866 75%
+        );
+        background-size: 200% auto;
+        background-position: 0 100%;
+        animation: gradient 2s infinite;
+        animation-fill-mode: forwards;
+        animation-timing-function: linear;
+        color: #c6ebf790;
+    }
+
+    @keyframes gradient {
+        0% {
+            background-position: 0 0;
+        }
+        40%,
+        100% {
+            background-position: -200% 0;
+        }
+    }
+
+    &:not(:disabled):hover {
+        background: lighten(#1d4d68, 5%);
+    }
+
+    &__large-cta {
+        padding-left: 60px;
+        padding-right: 60px;
+        border-left: 0;
+        border-right: 0;
+    }
+}

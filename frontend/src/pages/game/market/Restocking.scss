@@ -1,0 +1,10 @@
+@import "common";
+
+.market-restocking {
+  text-align: center;
+  padding: $padding-large 0;
+
+  > .content-text {
+    padding-bottom: $padding-med !important;
+  }
+}

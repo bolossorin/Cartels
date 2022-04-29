@@ -1,0 +1,348 @@
+@import "common";
+
+.estates {
+  position: relative;
+
+  &__top-background {
+    margin: -$content-padding;
+    margin-bottom: 0;
+    padding: $content-padding;
+    background: linear-gradient(to bottom, #0E111500 0%, #0E1115 300px), url('../../../assets/images/estate/background.png');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    .content-masthead {
+      margin-top: 200px;
+    }
+  }
+
+  > h3 {
+    font-family: $font-title-heavy;
+    font-size: $font-size-s;
+    margin-top: $padding-m;
+    margin-bottom: $padding-m;
+  }
+}
+
+.main-estates-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(125px, 2fr));
+  grid-row-gap: $padding-m;
+  grid-column-gap: $padding-m;
+  margin-top: $padding-m;
+
+  .estate-item {
+    background: rgba(255, 255, 255, 0.02);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: $padding-m;
+    border-radius: 8px;
+    height: 216px;
+
+    &__name {
+      position: absolute;
+      font-family: $font-body-heavy;
+      top: $padding-m;
+    }
+
+    &__image {
+      max-width: 100%;
+      max-height: 147px;
+
+      img {
+        width: 100%;
+        max-height: 100%;
+      }
+    }
+
+    &__unlocked {
+      position: absolute;
+      bottom: $padding-m;
+    }
+  }
+}
+
+.business-item {
+  display: flex;
+  align-items: center;
+  padding: $padding-m;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.02);
+  margin-top: $padding-med;
+
+  &__top {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-grow: 1;
+  }
+
+  &__image {
+    width: 130px;
+    height: 92px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 8px;
+    margin: -8px 0 -8px -8px;
+
+    &__img {
+      max-width: 100%;
+      max-height: 100%;
+      position: absolute;
+      bottom: 0;
+    }
+
+    &__upgrade {
+      top: -4px;
+      left: -4px;
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: $color-red-alert;
+      border-radius: 6px;
+
+      img {
+        height: 8px;
+      }
+    }
+  }
+
+  &__info {
+    height: 76px;
+    flex-grow: 1;
+    margin-left: $padding-m;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    >h4 {
+      font-family: $font-body-heavy;
+
+      span {
+        background: rgba(0, 0, 0, 0.75);
+        padding: 3px 12px;
+        border-radius: 4px;
+        font-family: $font-accented-header;
+        font-size: $font-size-xxs;
+        margin-left: $padding-med;
+      }
+    }
+
+    &__location {
+
+    }
+
+    &__production-amount {
+      display: flex;
+      align-items: center;
+
+      > .balance {
+        margin-left: 8px;
+      }
+    }
+  }
+
+  &__collect {
+    height: 76px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 146px;
+
+    > button {
+      flex-grow: 0;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  @media (max-width: $breakpoint-intermediary) {
+    flex-direction: column;
+    align-items: flex-start;
+
+    &__collect {
+      flex-grow: 1;
+      width: 100%;
+      margin-top: $padding-m;
+    }
+  }
+}
+
+.estate-modal {
+  h4 {
+    color: $color-white;
+    font-family: $font-body-heavy;
+  }
+
+  .modal-inner {
+    position: relative;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    max-width: 100vw;
+    background: #121212;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: $content-padding;
+
+    > h4 {
+      margin-bottom: $padding-m;
+    }
+
+    @media (min-width: $breakpoint-desktop) {
+      width: 880px;
+      min-height: 430px;
+      border-radius: 8px;
+    }
+  }
+
+  &__header {
+    position: relative;
+    width: 100%;
+
+    &__image {
+      position: relative;
+      width: 100%;
+      height: 130px;
+      display: flex;
+      justify-content: center;
+
+      img {
+        position: absolute;
+        bottom: 0;
+        width: 312px;
+        height: auto;
+      }
+
+      @media (max-width: $breakpoint-desktop) {
+        height: 150px;
+
+        img {
+          top: -20px;
+          max-width: 250px;
+          width: auto;
+          height: auto;
+          max-height: 175px;
+
+        }
+      }
+    }
+
+    &__close {
+      @include closeModalCross;
+
+      position: absolute;
+      top: $padding-m;
+      right: $padding-m;
+
+    }
+  }
+
+  &__info {
+    display: flex;
+    justify-content: space-between;
+
+    &__left {
+      &__location {
+        color: $color-white;
+      }
+    }
+
+    &__right {
+      display: flex;
+      align-items: center;
+
+      > span {
+        color: $color-white;
+      }
+
+      > .balance {
+        margin-left: 8px;
+      }
+    }
+  }
+
+  &__progress {
+    margin: $padding-m 0;
+  }
+
+  &__sell-close {
+    margin-top: $padding-m;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: $padding-m;
+    height: 58px;
+  }
+}
+
+.estate-action {
+  display: flex;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  height: 80px;
+  align-items: center;
+  margin-bottom: $padding-med;
+
+  &__image {
+    flex-grow: 1;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    max-width: 152px;
+
+    @media (max-width: $breakpoint-intermediary) {
+      display: none;
+    }
+  }
+
+  &__info {
+    flex-grow: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: $padding-med $padding-m;
+
+    &__type {
+      display: flex;
+      color: $color-white;
+
+      .balance {
+        margin-left: 8px;
+      }
+    }
+  }
+
+  &__button {
+    padding: $padding-med;
+    flex-grow: 1;
+    max-width: 224px;
+
+    button {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: $color-white;
+      text-transform: uppercase;
+      font-family: $font-accented-header;
+
+      @media (max-width: $breakpoint-intermediary) {
+        font-size: $font-size-xs;
+      }
+    }
+  }
+
+}
+

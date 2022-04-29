@@ -1,0 +1,123 @@
+@import "common";
+
+.market-card {
+  border-radius: 8px;
+  background: #151517;
+  margin: $padding-med 0;
+  padding: $padding-large;
+  cursor: pointer;
+  min-height: 200px;
+  //transition: 0.2s all;
+
+  &__owned {
+    opacity: 0.75;
+    filter: grayscale(70%);
+  }
+
+  &:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 16px rgba(0, 0, 0, 0.5);
+
+    .market-card__image .image {
+      img {
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  &:active {
+    box-shadow: 0 0 24px rgba(24, 134, 148, 0.5);
+  }
+
+  &:first-of-type {
+    margin-top: $padding-large;
+  }
+
+  &__red {
+    //151517
+    background: radial-gradient(circle at center, #281515, #2a2a2a, #2a2a2a);
+  }
+
+  &__blue {
+    background: radial-gradient(circle at center, #112448, #0a0c10);
+  }
+
+  &__cyan {
+    background: radial-gradient(circle at center, #152825, #2a2a2a, #2a2a2a);
+  }
+
+  &__purple {
+    background: radial-gradient(circle at center, #241528, #2a2a2a, #2a2a2a);
+  }
+
+  &__white {
+    background: radial-gradient(circle at center, #303030, #2a2a2a, #2a2a2a);
+  }
+
+  &__image {
+    .image {
+      img {
+        max-height: 190px;
+        max-width: 100%;
+        transition: 0.3s all;
+      }
+
+      margin: 0 auto;
+
+      @media (min-width: $breakpoint-desktop) {
+        margin: 0 auto -24px;
+      }
+      text-align: center;
+    }
+  }
+
+  &__title {
+    display: flex;
+    justify-content: space-between;
+    font-size: 22px;
+
+    &__owned {
+      display: inline-block;
+      color: #0c884b;
+
+      .image {
+        display: inline-block;
+        margin-left: $padding-med;
+        margin-right: $padding-med;
+
+        img {
+          height: 16px;
+        }
+      }
+    }
+
+    &__rarity {
+      padding: 4px 12px;
+      border: 1px solid #ffffff30;
+      border-radius: 8px;
+      box-shadow: inset 0 0 4px #00000050;
+
+      &__LEGENDARY {
+        background: linear-gradient(to top right, #ea313150, #31eadb50, #c231ea50, #ead13150, #ea313150);
+
+        > * {
+          color: #d09bfa !important;
+
+        }
+      }
+    }
+  }
+
+  &__stats {
+    display: flex;
+    justify-content: space-between;
+
+    .balance {
+      font-size: 24px;
+    }
+  }
+
+  &__desc {
+    width: 600px;
+  }
+}

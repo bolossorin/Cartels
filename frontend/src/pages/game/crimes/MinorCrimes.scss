@@ -1,0 +1,153 @@
+@import '../../../styles/common';
+
+.crimes-level-bar {
+  margin-top: $padding-m;
+}
+
+.crimes-tab-banner {
+  background: linear-gradient(to right, transparent, #ffffff27, transparent);
+  font-family: $font-body;
+  font-size: $font-size-l;
+  margin-top: $padding-large;
+  text-align: center;
+  text-transform: uppercase;
+  padding: 4px;
+
+  &__result {
+    margin-top: $padding-large;
+    margin-bottom: $padding-large;
+    background: linear-gradient(to right, transparent, $color-cartels-blue10, transparent);
+    font-family: $font-accented-header;
+  }
+
+  &__sub-label {
+    display: inline-block;
+    padding-left: $padding-med;
+    color: $color-cartels-blue;
+    font-family: $font-accented-header;
+  }
+}
+
+.limited-time-crime {
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: $color-gold-yellow;
+  text-shadow: 4px 4px 8px #000000;
+  background-color: #00000090;
+  border-bottom-left-radius: 8px;
+  padding: 6px 18px;
+
+  img {
+    vertical-align: text-top;
+    margin-right: 8px;
+    opacity: 0.75;
+  }
+}
+
+.crime-item {
+  background: black;
+  border-radius: 8px;
+  margin-top: $padding-m;
+  background-size: cover;
+  background-blend-mode: luminosity;
+  position: relative;
+
+  &__limited {
+    border: 4px solid rgba(255, 215, 0, 0.44) !important;
+  }
+
+  &:hover {
+    background-blend-mode: normal;
+    cursor: pointer;
+  }
+
+  &__content {
+    max-width: 240px;
+    border-radius: 8px 0 0 8px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: $padding-m;
+    background: linear-gradient(to right, #111111 0%, #111111 50%, #11111100 100% );
+
+
+    h3 {
+      font-size: $font-size-m;
+      font-family: $font-accented-header;
+      white-space: nowrap;
+    }
+
+    &__description {
+      color: $color-annotation-grey;
+    }
+
+    &__loot {
+      display: flex;
+
+      .balance {
+        margin-right: 20px;
+      }
+
+      &__exp {
+        color: $color-cartels-blue;
+        font-family: $font-accented-header;
+      }
+    }
+
+    .percent-bar {
+      flex-shrink: 0;
+      margin-bottom: 0;
+    }
+  }
+
+  &--loading {
+    position: relative;
+    overflow: hidden;
+    display: block;
+    background-blend-mode: normal;
+
+    &:after {
+      content: ' ';
+      position: absolute;
+      top: -50%;
+      right: -60%;
+      bottom: -50%;
+      left: -60%;
+      background: linear-gradient(rgba(255,255,255,0) 20%, rgba(255,255,255,.15) 50%, rgba(255,255,255,0)) 80%;
+      transform: rotate(70deg) translate(0, 10em);
+      animation: 1.6s crime-load-swoosh infinite;
+      display: block;
+    }
+  }
+
+  &--locked {
+    position: relative;
+    overflow: hidden;
+    display: block;
+
+    &:hover {
+      background-blend-mode: luminosity;
+      cursor: not-allowed;
+    }
+
+    //animation: 2s button-load-swoosh infinite;
+
+    &:after {
+      content: ' ';
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      background: linear-gradient(rgba(0,0,0,.6) 0%, rgba(0,0,0,.6) 100%);
+    }
+  }
+}
+
+@keyframes crime-load-swoosh {
+  from { transform: rotate(70deg) translate(0, 30em); }
+  to { transform: rotate(70deg) translate(0, -38em); }
+}

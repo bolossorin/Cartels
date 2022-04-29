@@ -1,0 +1,27 @@
+@import "common";
+
+.content-masthead {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  width: max-content;
+  display: inline-block;
+  padding-right: 64px;
+
+  &__full {
+    border-bottom: none;
+  }
+
+  span, span a:link, span a:visited, span a:hover {
+    margin-top: -4px;
+    padding-bottom: 4px;
+    display: block;
+    font-family: $font-title !important;
+    font-size: 24px;
+    color: $color-white;
+  }
+
+  @media (max-width: $breakpoint-desktop) {
+    padding: 0 0 8px;
+    flex: 0 1 100%;
+    border: 0;
+  }
+}

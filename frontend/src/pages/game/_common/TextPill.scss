@@ -1,0 +1,22 @@
+@import 'common';
+
+.text-pill {
+    font-size: $font-size-s;
+    padding: 8px;
+
+    img {
+        vertical-align: -10%;
+    }
+
+    &__error {
+        color: #ff6459;
+    }
+
+    &__info {
+        color: $white-font-darker;
+    }
+
+    &__bonus {
+        color: #ff57ba;
+    }
+}

@@ -1,0 +1,9 @@
+@import '../../../../../styles/common';
+
+.box-title {
+    @include contentSubBoxTitle;
+}
+
+.main-box__content {
+    background-color: $main-black;
+}

@@ -1,0 +1,268 @@
+@import 'common';
+
+.jail {
+  position: relative;
+
+  .content-masthead {
+    position: relative;
+    z-index: 1;
+    text-shadow: 4px 4px 8px #000000;
+  }
+
+  .background {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 0;
+    -webkit-mask-image: linear-gradient(to bottom, black 30%, transparent 95%);
+    mask-image: linear-gradient(to bottom, black 30%, transparent 95%);
+    user-select: none;
+    user-drag: none;
+
+    @media (max-width: $breakpoint-intermediary) {
+      width: $breakpoint-intermediary;
+      left: calc(50% - 350px);
+    }
+  }
+
+  &__recent {
+    position: absolute;
+    z-index: 3;
+    width: 100%;
+    padding-right: $padding-med;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    &__bust {
+      padding: $padding-med $padding-large;
+      border-radius: 6px;
+      margin-bottom: 6px;
+      border: 1px solid #000;
+      background: #00000099;
+      animation: bustAppear cubic-bezier(.17,.67,.37,1) 5s;
+      animation-fill-mode: forwards;
+      @keyframes bustAppear {
+        0% {
+          opacity: 0;
+          transform: translateY(40px);
+        }
+        10% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        90% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        99% {
+          opacity: 0;
+          transform: translateY(40px);
+        }
+        100% {
+          visibility: hidden;
+        }
+      }
+
+      > .name-tag {
+        display: inline;
+
+        p {
+          display: inline-block;
+        }
+      }
+    }
+  }
+
+  .inmates-list {
+    position: relative;
+    z-index: 1;
+    margin-top: 200px;
+    margin-bottom: $padding-large;
+
+    &__empty {
+      text-align: center;
+      padding: $padding-med;
+      background: linear-gradient(to right, transparent, #000000aa, transparent);
+      font-family: $font-accented-header;
+      color: $color-body-grey;
+    }
+  }
+
+  &__champion {
+    background:
+            url('../../../assets/images/jail/Group 337.png'),
+            url('../../../assets/images/jail/Group 337_r.png'),
+            linear-gradient(to right, #ffffff00 0%, #ffffff29 50%, #ffffff00 100%);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: calc(50% - 160px), calc(50% + 160px), center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: $padding-med 0;
+
+    &__busts {
+      font-family: $font-accented-header;
+      color: $color-cartels-blue;
+    }
+  }
+
+  &__stats {
+    background: url('../../../assets/images/jail/cuffs.png'), rgba(255, 255, 255, 0.02);
+    background-repeat: no-repeat;
+    background-position: calc(50% + 220px);
+    background-size: contain;
+    border-radius: 8px;
+    margin: $padding-med 0;
+    padding: $padding-m;
+    display: flex;
+
+    &__total {
+      margin-right: $padding-large;
+
+      h4 {
+        font-family: $font-body-heavy;
+      }
+
+      p {
+        font-family: $font-accented-header;
+        color: $color-cartels-blue;
+      }
+    }
+
+    &__details {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      p {
+        font-family: $font-body-heavy;
+      }
+    }
+  }
+
+  &__legend {
+    display: flex;
+    flex-wrap: wrap;
+
+    &__item {
+      display: flex;
+      align-items: center;
+      margin-right: $padding-large;
+
+      img {
+        margin-right: $padding-med;
+      }
+
+      p {
+        line-height: 30px;
+      }
+    }
+  }
+
+  .subtitle {
+    font-family: $font-title;
+    font-size: $font-size-m;
+  }
+}
+
+.inmate {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  background: $color-panels;
+  border-radius: 10px;
+  margin-top: 8px;
+
+  &:hover {
+    background: rgba(30, 30, 30, 0.8);
+  }
+
+  &--own {
+    background: rgba(0, 0, 0, 1);
+  }
+
+  &__info {
+    display: flex;
+
+    &__star {
+      flex-shrink: 0;
+      margin: 17px;
+      width: 20px;
+      height: 20px;
+
+      img {
+        width: 100%;
+      }
+    }
+
+    &__id {
+      margin: 5px 0;
+      padding-right: $padding-m;
+      display: flex;
+      width: 130px;
+      flex-shrink: 0;
+      flex-direction: column;
+      justify-content: space-between;
+
+      &__rank {
+        color: $color-body-grey;
+
+        &--special {
+          color: $color-crypto-purple;
+          font-family: $font-body-heavy;
+        }
+      }
+    }
+
+    &__crime {
+      margin: 5px 0;
+      padding-left: $padding-m;
+      border-left: 2px solid $color-dividers;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      h4 {
+        font-size: $font-size-s;
+        font-family: $font-body-heavy;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+
+      p {
+        color: $color-body-grey
+      }
+    }
+  }
+
+  &__timer-button {
+    display: flex;
+    justify-content: flex-end;
+    padding: 4px;
+    flex-grow: 1;
+
+    &__timer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 $padding-m;
+
+      img {
+        width: 18px;
+        height: 18px;
+        margin-left: 8px;
+      }
+    }
+
+    button {
+      max-width: 150px;
+      font-family: $font-body-heavy;
+    }
+
+  }
+}

@@ -1,0 +1,97 @@
+@import '../../../../styles/common';
+
+.styled-button {
+    @include bigButton(#372929);
+    transition: 0.2s all;
+    font-size: 18px;
+
+    &:hover {
+        box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
+            0 10px 10px rgba(0, 0, 0, 0.22);
+    }
+
+    &__disabled {
+        filter: grayscale(75%);
+        opacity: 0.5;
+        color: #111;
+        font-style: oblique;
+        cursor: not-allowed;
+    }
+
+    &__loading {
+        opacity: 0.5;
+        box-shadow: inset 0 0 34px black !important;
+
+        span {
+            transform: scale(1);
+            animation: pulse 1s infinite;
+            color: rgba(0, 0, 0, 0.8);
+            margin: 2px;
+            display: inline-block;
+            font-size: 11pt;
+
+            @media (min-width: $breakpoint-desktop) {
+                font-size: 13pt;
+            }
+
+            &:nth-of-type(2) {
+                animation-delay: 0.2s;
+            }
+
+            &:nth-of-type(3) {
+                animation-delay: 0.4s;
+            }
+        }
+    }
+
+    &__blue {
+        background: linear-gradient(
+            to bottom,
+            $low-difficulty-blue,
+            darken($low-difficulty-blue, 25%)
+        );
+    }
+
+    &__yellow {
+        background: linear-gradient(
+            to bottom,
+            $medium-difficulty-yellow,
+            darken($medium-difficulty-yellow, 25%)
+        );
+    }
+
+    &__red {
+        background: linear-gradient(
+            to bottom,
+            $hard-difficulty-red,
+            darken($hard-difficulty-red, 25%)
+        );
+    }
+
+    &__purple {
+        background: linear-gradient(
+            to bottom,
+            $very-hard-difficulty-purple,
+            darken($very-hard-difficulty-purple, 25%)
+        );
+    }
+}
+
+@keyframes pulse {
+    from {
+        transform: scale(1);
+    }
+    5% {
+        transform: scale(1);
+    }
+    30% {
+        transform: scale(1.8) translateY(-1px);
+        //color: $main-black;
+    }
+    45% {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1);
+    }
+}

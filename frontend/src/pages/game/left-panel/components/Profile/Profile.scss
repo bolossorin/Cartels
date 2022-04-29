@@ -1,0 +1,76 @@
+@import '../../../../../styles/common';
+
+.profile-avatar-container {
+    width: 100%;
+    height: 98px;
+}
+
+.profile-container {
+    position: relative;
+
+    .easter-container {
+        position: absolute;
+        top: 18px;
+        right: 2px;
+
+        img {
+            //width: 48px;
+            height: 48px;
+            opacity: 0.5;
+            transition: 0.6s all;
+
+            &:hover {
+                opacity: 1;
+                transform: rotateZ(5deg) scale(1.2);
+            }
+        }
+    }
+
+    .avatar-container {
+        margin-left: -$content-padding;
+        margin-right: -$content-padding;
+        margin-top: -$content-padding;
+        width: calc(100% + #{$content-padding} + #{$content-padding});
+        display: block;
+
+        .profile-picture {
+            width: 100%;
+            -webkit-mask-image: linear-gradient(to bottom, black 75%, transparent 90%);
+            mask-image: linear-gradient(to bottom, black 75%, transparent 90%);
+
+            &:after {
+                padding-top: 100%;
+                display: block;
+                content: '';
+            }
+        }
+    }
+
+    .profile-info-container {
+        display: flex;
+        flex-direction: column;
+        margin-top: -50px;
+        position: relative;
+        z-index: 2;
+
+        font-family: 'FuturaBold', sans-serif;
+
+        .names {
+            .name-tag {
+                p {
+                    font-family: 'FuturaBoldOblique', sans-serif;
+                    font-size: 18px;
+                    color: #e4e4e4;
+                }
+            }
+        }
+
+        .rank {
+            font-size: 16px;
+            text-align: right;
+            color: #1FA5DF;
+            text-transform: uppercase;
+            font-family: 'FuturaBoldOblique', sans-serif;
+        }
+    }
+}

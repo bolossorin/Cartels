@@ -1,0 +1,243 @@
+@import 'common.scss';
+
+@font-face {
+    font-family: 'FuturaPT';
+    src: url('../assets/fonts/Futura/FuturaPTLight.otf');
+    font-weight: 200;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FuturaPT';
+    src: url('../assets/fonts/Futura/FuturaPTMedium.otf');
+    font-weight: 400;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FuturaPT';
+    src: url('../assets/fonts/Futura/FuturaPTDemi.otf');
+    font-weight: 600;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FuturaBook';
+    src: url('../assets/fonts/Futura/FuturaPTBook.otf');
+    font-weight: 300;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FuturaHeading';
+    src: url('../assets/fonts/Futura/FuturaPTDemi.otf');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FuturaLight';
+    src: url('../assets/fonts/Futura/FuturaPTLight.otf');
+    font-weight: 300;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FuturaMedium';
+    src: url('../assets/fonts/Futura/FuturaPTMedium.otf');
+    font-weight: 300;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FuturaNormal';
+    src: url('../assets/fonts/Futura/FuturaPTMedium.otf');
+    //font-weight: 300;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FuturaOblique';
+    src: url('../assets/fonts/Futura/FuturaPTMediumOblique.otf');
+    //font-weight: 300;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FuturaBold';
+    src: url('../assets/fonts/Futura/FuturaPTBold.otf');
+    //font-weight: 300;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FuturaHeavy';
+    src: url('../assets/fonts/Futura/FuturaPTHeavy.otf');
+    //font-weight: 300;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FuturaBoldOblique';
+    src: url('../assets/fonts/Futura/FuturaPTBoldOblique.otf');
+    //font-weight: 300;
+    font-display: swap;
+}
+
+html {
+    overflow-y: overlay;
+    touch-action: manipulation;
+}
+
+.container {
+    min-height: 100vh;
+    height: 100%;
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+    font-family: 'FuturaNormal', sans-serif;
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #000;
+    background-attachment: fixed;
+    background-size: cover;
+
+    @media (min-width: $breakpoint-desktop) {
+        background-repeat: no-repeat;
+        background-position: center;
+        background-color: #000;
+        background-attachment: fixed;
+        background-size: cover;
+    }
+}
+
+* {
+    box-sizing: border-box;
+    font-family: $font-body;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+    display: block;
+}
+
+#root,
+#app {
+    width: 100%;
+}
+
+.title {
+    font-family: $font-title;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+}
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    text-decoration: none;
+}

@@ -1,0 +1,16 @@
+{
+  "development": {
+    "username": "bootleggers",
+    "password": "bootleggers",
+    "database": "bootleggers",
+    "host": "postgres",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "bootleggers",
+    "password": "bootleggers",
+    "database": "bootleggers",
+    "host": "postgres",
+    "dialect": "postgres"
+  }
+}

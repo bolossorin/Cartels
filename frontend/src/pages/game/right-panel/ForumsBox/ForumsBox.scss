@@ -1,0 +1,51 @@
+@import '../../../../styles/common';
+
+.forums-box {
+    .forums-box__header {
+        @include leftSideBoxesPadding;
+        @include contentBoxHeaderGradient;
+        @include sideBoxHeader(left, false);
+    }
+
+    .forums-box__list {
+        @include alternateColorList(
+            $alternate-color-darker,
+            $alternate-color-lighter
+        );
+
+        li a {
+            @include leftSideBoxesPadding;
+            @include itemsListFlex;
+            @include itemsListStyle;
+            height: 100%;
+        }
+
+        .forum-new {
+            color: $forum-new-green;
+            margin-left: 5px;
+            font-size: 12px;
+        }
+
+        .forum-count--0 {
+            color: $grey-font;
+        }
+    }
+
+    .announce-box-remove-after-forums {
+        background-color: $alternate-color-darker;
+        padding: $padding-med;
+        color: #fff;
+        font-family: 'FuturaBook', sans-serif;
+        font-size: 18px;
+        text-align: center;
+        display: flex;
+        align-content: center;
+        align-items: center;
+
+        img {
+            height: 60px;
+            width: 60px;
+            display: block;
+        }
+    }
+}

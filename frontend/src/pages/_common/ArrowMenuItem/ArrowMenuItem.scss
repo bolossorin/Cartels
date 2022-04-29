@@ -1,0 +1,74 @@
+@import "common";
+
+.arrow-menu-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  transition: 0.2s all;
+
+  padding: 6px 0;
+  background: transparent;
+  border-radius: 12px;
+
+  &__linked {
+    cursor: pointer;
+
+    &:hover {
+      background: $color-items;
+    }
+  }
+
+  &__count {
+    border-radius: 32px;
+    color: $color-black;
+    font-family: $font-body-heavy;
+    font-size: $font-size-m;
+    height: 28px;
+    width: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+
+    &__yellow {
+      background: $color-gold-yellow;
+    }
+
+    &__blue {
+      background: $color-cartels-blue;
+    }
+
+    &__purple {
+      background: $color-ultra-rare;
+    }
+  }
+
+  &__text {
+    flex-grow: 1;
+    font-size: $font-size-xs;
+    font-family: $font-body;
+    color: $color-white;
+
+    &__title {
+      font-family: $font-title;
+      font-size: $font-size-xs;
+      text-transform: uppercase;
+
+      img {
+        display: inline-block;
+        margin-top: -2px;
+        vertical-align: middle;
+      }
+    }
+  }
+
+  &__arrow {
+    height: 100%;
+
+    .image {
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+  }
+}

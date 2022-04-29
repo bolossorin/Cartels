@@ -1,0 +1,51 @@
+@import '../../../../styles/common';
+
+.image-card-box__item {
+    margin: 10px;
+    padding: 10px;
+    // height: 194px;
+    background-image: linear-gradient(
+        $box-item-background-gradient-top,
+        $box-item-background-gradient-bottom
+    );
+
+    display: flex;
+    flex-direction: row;
+}
+
+.image-card-box__text,
+.image-card-box__item__image {
+    width: 50%;
+    height: calc(100% - 40px);
+    img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+.image-card-box__text h3,
+.image-card-box__text__price {
+    height: 22%;
+    background-color: $headers-grey;
+}
+.image-card-box__text__text {
+    height: 56%;
+    background-color: $item-text-background;
+}
+
+.image-card-box__text h3,
+.image-card-box__text__price,
+.image-card-box__text__text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    p {
+        margin: 5px;
+    }
+}
+.image-card-box__text__price {
+    flex-direction: row;
+    justify-content: flex-end;
+    padding: 10px;
+}

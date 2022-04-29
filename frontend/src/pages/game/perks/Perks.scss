@@ -1,0 +1,25 @@
+@import "common";
+
+.perks-bar {
+  margin-bottom: $padding-med;
+  padding: 0;
+
+  &__title {
+    padding: 12px 25px;
+    font-family: $font-title;
+    font-size: $font-size-s;
+
+    &__arrow {
+      float: right;
+    }
+  }
+
+  &__content {
+    background-color: #42424225;
+    padding: 12px 25px;
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    overflow: hidden;
+  }
+}

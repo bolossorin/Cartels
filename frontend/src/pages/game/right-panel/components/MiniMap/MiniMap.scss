@@ -1,0 +1,120 @@
+@import "common";
+
+.mini-map {
+  background-color: rgba(48, 89, 120, 0.25);
+  background-image: url("../../../../../assets/images/map/ALL_MAP.svg");
+  //backdrop-filter: brightness(280%) blur(8px);
+  //-webkit-backdrop-filter: brightness(280%) blur(8px);
+  //background-size: auto 490px;
+  min-height: 280px;
+  position: relative;
+  transition: 0.2s all;
+  //cursor: pointer;
+  //background-size: length;
+  background-size: auto 220%;
+  margin-bottom: $padding-med;
+
+  p {
+    //text-shadow: 0 0 12px #000000aa;
+    color: #fff;
+  }
+
+  &__pills {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    width: 100%;
+    padding: $padding-med;
+
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+    a {
+      color: #fff;
+    }
+
+    &__item {
+      border-radius: 8px;
+      backdrop-filter: blur(4px);
+      min-width: 104px;
+      padding: 4px $padding-med;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'FuturaBold', sans-serif;
+      font-size: 16px;
+      transition: 0.2s all;
+
+      &:hover {
+        min-width: 125px;
+      }
+
+      &__black {
+        background-color: #00000085;
+      }
+
+      &__red {
+        background-color: #c72d18aa;
+      }
+    }
+  }
+
+  img {
+    position: absolute;
+    height: 24px;
+    width: 24px;
+    transition: 0.4s all;
+  }
+
+  &__d {
+    background-position: 880px -40px;
+
+    img {
+      top: 110px;
+      left: 80px;
+    }
+  }
+
+  &__pc {
+    background-position: 800px -130px;
+
+    img {
+      top: 140px;
+      left: 160px;
+    }
+  }
+
+  &__mc {
+    background-position: 650px -10px;
+
+    img {
+      top: 135px;
+      left: 140px;
+    }
+  }
+
+  &__sf {
+    background-position: 625px 280px;
+
+    img {
+      top: 95px;
+      left: 140px;
+    }
+  }
+
+  &__vh {
+    background-position: 425px -60px;
+
+    img {
+      top: 85px;
+      left: 170px;
+    }
+  }
+
+  p {
+    font-family: 'FuturaBoldOblique', sans-serif;
+    font-size: 28px;
+    text-transform: uppercase;
+  }
+}

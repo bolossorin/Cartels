@@ -1,0 +1,16 @@
+@import '../../../../styles/common';
+
+.crew-icon {
+    width: 60px;
+    display: flex;
+    flex-direction: row;
+
+    .crew-image {
+        width: 55px;
+        height: 55px;
+    }
+    .crew-color {
+        width: 5px;
+        height: 55px;
+    }
+}

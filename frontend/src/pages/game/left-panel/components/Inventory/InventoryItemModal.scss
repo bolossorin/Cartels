@@ -1,0 +1,53 @@
+@import 'common';
+
+.modal-inventory-item {
+  .modal-inner {
+    background-color: unset;
+    box-shadow: unset;
+  }
+
+  &__container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    @media (min-width: $breakpoint-intermediary) {
+      flex-direction: row;
+    }
+  }
+
+  &__image {
+    img {
+      max-height: 180px;
+
+      @media (min-width: $breakpoint-intermediary) {
+        max-height: 350px;
+      }
+    }
+  }
+
+  &__description {
+    @media (min-width: $breakpoint-intermediary) {
+      margin-left: 28px;
+    }
+
+    > article {
+      min-height: 200px !important;
+      width: 85vw !important;
+      padding: $padding-med;
+
+      @media (min-width: $breakpoint-intermediary) {
+        width: 50vw !important;
+        max-width: 370px;
+      }
+
+      desc {
+        font-size: 16px;
+      }
+    }
+
+    &__control {
+      display: flex;
+    }
+  }
+}

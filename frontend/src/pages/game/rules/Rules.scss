@@ -1,0 +1,257 @@
+@import '../../../styles/common';
+
+.rules-container {
+    width: 100%;
+
+    .rules-header {
+        @include contentBoxHeader;
+    }
+
+    .rules-nav {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        cursor: pointer;
+        user-select: none;
+
+        .nav-item {
+            width: calc((100% / 2) - 2px);
+            position: relative;
+            border-bottom: 3px solid #038eb7;
+            background-color: #1c252c;
+            height: 60px;
+            box-shadow: inset 0px -1px 1px 0px rgba(0, 0, 0, 0.75);
+            transition: 0.2s all;
+
+            &:not(.nav-item-active):hover {
+                box-shadow: inset 0px 0 8px 0px rgba(0, 0, 0, 0.75);
+            }
+
+            &:not(.nav-item-active):active {
+                transform: scale(0.98);
+            }
+
+            &-active {
+                cursor: default;
+            }
+
+            &-active {
+                .rules-nav-info {
+                    background: #1c252c
+                        linear-gradient(to top, #038eb755, transparent);
+                }
+            }
+
+            .rules-nav-info {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                height: 100%;
+
+                p {
+                    text-transform: uppercase;
+                    color: $white-font-darker;
+                }
+            }
+        }
+    }
+
+    .rules-wrapper {
+        overflow: hidden;
+        width: 100%;
+    }
+
+    .rules-page {
+        width: 200%;
+        display: flex;
+        transition: 0.2s all;
+        margin-top: 2px;
+        align-items: start;
+
+        .rules,
+        .privacy-policy {
+            width: calc(100% / 2);
+        }
+        
+        .privacy-policy {
+            padding: 24px;
+            font-size: $font-size-s;
+
+            p:not(:first-of-type) {
+                margin-top: 16px;
+            }
+
+            h3 {
+                margin-top: 16px;
+                font-size: $font-size-m;
+                font-family: $font-title-heavy;
+            }
+        }
+
+        &--1 {
+            transform: translateX(calc(0));
+        }
+        &--2 {
+            transform: translateX(calc(-100% / 2));
+
+            .rule:nth-of-type(n+5) {
+                display: none;
+            }
+
+            h2:nth-of-type(n+1) {
+                display: none;
+            }
+        }
+    }
+}
+
+.rules {
+    h2 {
+        height: 70px;
+        color: $white-font-darker;
+        font-size: 36px;
+        margin-top: 20px;
+        
+
+        &:nth-of-type(1) {
+            background: linear-gradient(360deg, rgba(248, 136, 136, 0.38) 8.57%, rgba(164, 96, 96, 0.840625) 83.81%, #945454 100%);
+            margin-top: 0;
+        }
+        &:nth-of-type(2) {
+            background: linear-gradient(360deg, rgba(138, 248, 136, 0.38) 8.57%, rgba(96, 164, 115, 0.840625) 83.81%, #54946D 100%);
+        }
+        &:nth-of-type(3) {
+            background: linear-gradient(360deg, rgba(136, 181, 248, 0.38) 8.57%, rgba(96, 131, 164, 0.840625) 83.81%, #546D94 100%);
+        }
+        &:nth-of-type(4) {
+            background: linear-gradient(360deg, #96905E 8.57%, rgba(217, 209, 136, 0.840625) 83.81%, #AAA470 100%);
+        }
+
+        @media screen and (max-width: 465px) {
+            font-size: 22px;
+            height: 50px;
+        }
+    }
+}
+
+.rule {
+    display: flex;
+    border-top: 2px solid black;
+
+    .rule-image {
+        flex-grow: 1;
+        background-repeat: no-repeat !important;
+        background-position: center !important;
+
+        @media screen and (max-width: 430px) {
+            background-size: 80% !important;
+        }
+    }
+
+    .rule-text {
+        width: calc(100% - 150px);
+        border-left: 2px solid black;
+
+        h3 {
+            text-transform: uppercase;
+            font-size: 25px;
+            color: $white-font-darker;
+            padding: 6px 24px;
+        }
+
+        p {
+            background: #1E2229;
+            padding: 12px 27px 15px 24px;
+            font-size: 18px;
+            color: $white-font-darker;
+        }
+
+        @media screen and (max-width: 465px) {
+            h3 {
+                font-size: 20px;
+            }
+        }
+
+        @media screen and (max-width: 430px) {
+            width: calc(100% - 100px);
+        }
+    }
+
+    &--general {
+        background: #5F4446;
+
+        h3 {
+            background: linear-gradient(to right, #855457 0%, #1E2229 100%);
+        }
+
+        &:nth-of-type(odd) {
+            background: #422f31;
+
+            h3 {
+                background: linear-gradient(to right, #5d3a3c 0%, #131519 100%);
+            }
+
+            p {
+                background: #131519;
+            }
+        }
+    }
+    &--forum {
+        background: #416E55;
+
+        h3 {
+            background: linear-gradient(to right, #7aad9280 0%, #1E2229 100%);
+        }
+
+        &:nth-of-type(odd) {
+            background: #2e4f3c;
+
+            h3 {
+                background: linear-gradient(to right, #577c6880 0%, #131519 100%);
+            }
+
+            p {
+                background: #131519;
+            }
+        }
+    }
+    &--points {
+        background: #34435B;
+
+        h3 {
+            background: linear-gradient(to right, #7a9bb090 0%, #131519 100%);
+        }
+
+        &:nth-of-type(odd) {
+            background: #243040;
+
+            h3 {
+                background: linear-gradient(to right, #576f7e90 0%, #131519 100%);
+            }
+
+            p {
+                background: #131519;
+            }
+        }
+    }
+    &--family {   
+        background: #73705C;
+
+        h3 {
+            background: linear-gradient(to right, #908c63 0%, #1E2229 100%);
+        }
+
+        &:nth-of-type(odd) {
+            background: #525041;
+
+            h3 {
+                background: linear-gradient(to right, #676447 0%, #131519 100%);
+            }
+
+            p {
+                background: #131519;
+            }
+        }
+    }
+}

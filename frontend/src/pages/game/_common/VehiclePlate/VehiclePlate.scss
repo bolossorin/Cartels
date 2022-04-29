@@ -1,0 +1,30 @@
+@import "common";
+
+.vehicle-plate {
+  height: 80px;
+  background: #fff;
+  width: 200px;
+  border-radius: 6px;
+  padding: 2px;
+  margin-top: 12px;
+  text-align: center;
+
+  &__inner {
+    border: 4px solid $color-black;
+    border-radius: 6px;
+    height: 100%;
+    width: 100%;
+
+    &__origin {
+      color: #C33381;
+      font-family: 'FuturaOblique', sans-serif;
+      font-size: $font-size-s;
+    }
+
+    &__text {
+      color: $color-black;
+      font-family: $font-title-heavy;
+      font-size: $font-size-xl;
+    }
+  }
+}

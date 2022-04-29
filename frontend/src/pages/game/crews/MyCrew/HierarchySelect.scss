@@ -1,0 +1,82 @@
+@import "common";
+
+.crew-hierarchy-select-container {
+  width: 100%;
+  height: 40px;
+}
+
+.crew-hierarchy-select {
+
+
+  &__control {
+    height: 100%;
+    border-radius: 8px !important;
+    border-color: $color-dividers !important;
+    background: rgba(0, 0, 0, 0.28) !important;
+    box-shadow: none !important;
+
+
+    &--menu-is-open {
+      border-color: $color-white !important;
+
+    }
+  }
+
+  &__value-container {
+    height: 100%;
+    display: flex !important;
+  }
+
+  &__single-value {
+    color: $white-font !important;
+  }
+
+  &__multi-value {
+    background: rgba(255, 255, 255, 0.1) !important;
+    &__label {
+      color: $white-font !important;
+
+    }
+
+    &__remove {
+      cursor: pointer;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.1) !important;
+        color: $white-font !important;
+      }
+    }
+  }
+
+  &__input-container {
+    height: 100%;
+    display: flex !important;
+  }
+
+  &__input {
+    height: 100%;
+    text-align: left;
+    color: $white-font !important;
+  }
+
+  &__menu {
+    overflow: hidden;
+    background: rgba(0, 0, 0, 1) !important;
+    border-radius: 8px !important;
+    border: solid $color-white 1px !important;
+  }
+
+  &__menu-list {
+
+  }
+
+  &__option {
+    &:hover {
+      background: rgba(255, 255, 255, 0.1) !important;
+    }
+    &--is-focused {
+      background: rgba(255, 255, 255, 0.1) !important;
+    }
+
+  }
+}

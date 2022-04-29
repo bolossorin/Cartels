@@ -1,0 +1,558 @@
+---
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Brink of War Infrastructure
+
+Parameters:
+
+  Environment:
+    Type: String
+    Default: Staging
+    AllowedValues:
+      - Staging
+      - Prod
+
+  WebsiteFQDN:
+    Type: String
+    Description: Domain name less environment prefix
+    Default: brinkofwar.codeorder.com
+
+  BucketName:
+    Type: String
+    Description: S3 bucket name to store build artifacts less environment prefix
+    Default: brinkofwar-frontend
+
+  ACMCertArn:
+    Type: String
+    Default: arn:aws:acm:us-east-1:925000790351:certificate/2e117cb5-a6e2-49a6-8942-90127d8ec5bc #brinkofwar.codeorder.com
+
+  Route53HostedZoneID:
+    Type: String
+    Default: Z2MVGBDQ2S0JTO #codeorder.com
+
+  ServiceName:
+    Type: String
+    Default: brinkofwar
+
+  Image:
+    Type: String
+    Default: 123456789012.dkr.ecr.region.amazonaws.com/image:tag
+
+  ECSTaskCpu:
+    Type: String
+    Default: 256
+
+  ECSTaskMemory:
+    Type: String
+    Default: 0.5GB
+
+  BackendImage:
+    Type: String
+
+  BackendPHPImage:
+    Type: String
+
+  VPCID:
+    Type: String
+
+  VPCDefaultSG:
+    Type: String
+
+  Subnets:
+    Type: CommaDelimitedList
+
+  Version:
+    Type: String
+
+  ContainerPort:
+    Type: String
+    Default: 8080
+
+Conditions:
+  Is_Production:
+    !Equals [!Ref Environment, "Prod"]
+  Is_Staging:
+    !Equals [!Ref Environment, "Staging"]
+
+Mappings:
+  EnvironmentMap:
+    Staging:
+      LowerCaseValue: staging
+    Prod:
+      LowerCaseValue: prod
+
+Resources:
+
+  ##
+  ## Backend Infra
+  ##
+  ECSCluster:
+    Type: AWS::ECS::Cluster
+    Properties:
+      ClusterName: !Join ['-', [!Ref ServiceName, !Ref Environment]]
+
+  BackendTask:
+    Type: AWS::ECS::TaskDefinition
+    # Makes sure the log group is created before it is used.
+    DependsOn: BackendLogGroup
+    Properties:
+      Family: !Join ['', [!Ref ServiceName, !Ref Environment, TaskDefinition]]
+      NetworkMode: awsvpc
+      RequiresCompatibilities:
+        - FARGATE
+      # 256 (.25 vCPU) - Available memory values: 0.5GB, 1GB, 2GB
+      # 512 (.5 vCPU) - Available memory values: 1GB, 2GB, 3GB, 4GB
+      # 1024 (1 vCPU) - Available memory values: 2GB, 3GB, 4GB, 5GB, 6GB, 7GB, 8GB
+      # 2048 (2 vCPU) - Available memory values: Between 4GB and 16GB in 1GB increments
+      # 4096 (4 vCPU) - Available memory values: Between 8GB and 30GB in 1GB increments
+      Cpu: !Ref ECSTaskCpu
+      # 0.5GB, 1GB, 2GB - Available cpu values: 256 (.25 vCPU)
+      # 1GB, 2GB, 3GB, 4GB - Available cpu values: 512 (.5 vCPU)
+      # 2GB, 3GB, 4GB, 5GB, 6GB, 7GB, 8GB - Available cpu values: 1024 (1 vCPU)
+      # Between 4GB and 16GB in 1GB increments - Available cpu values: 2048 (2 vCPU)
+      # Between 8GB and 30GB in 1GB increments - Available cpu values: 4096 (4 vCPU)
+      Memory: !Ref ECSTaskMemory
+      # A role needed by ECS.
+      # "The ARN of the task execution role that containers in this task can assume. All containers in this task are granted the permissions that are specified in this role."
+      # "There is an optional task execution IAM role that you can specify with Fargate to allow your Fargate tasks to make API calls to Amazon ECR."
+      ExecutionRoleArn: !Ref ExecutionRole
+      # "The Amazon Resource Name (ARN) of an AWS Identity and Access Management (IAM) role that grants containers in the task permission to call AWS APIs on your behalf."
+      TaskRoleArn: !Ref TaskRole
+      ContainerDefinitions:
+        - Name: !Sub ${ServiceName}-backend
+          Essential: true
+          Environment:
+            - Name: AWS_ENV_PATH
+              Value: !Sub "/${ServiceName}/${Environment}"
+              # Value: !Sub "/bootleggers/${Environment}"
+            - Name: AWS_REGION
+              Value: !Ref AWS::Region
+          Image: !Sub ${BackendImage}:${Version}
+          # Memory: 128
+          PortMappings:
+            - ContainerPort: !Ref ContainerPort
+          LogConfiguration:
+            LogDriver: awslogs
+            Options:
+              awslogs-group: !Ref BackendLogGroup
+              awslogs-region: !Ref AWS::Region
+              awslogs-stream-prefix: ecs
+        - Name: !Sub ${ServiceName}-php
+          Essential: true
+          Environment:
+            - Name: AWS_ENV_PATH
+              Value: !Sub "/${ServiceName}/${Environment}"
+              # Value: !Sub "/bootleggers/${Environment}"
+            - Name: AWS_REGION
+              Value: !Ref AWS::Region
+          Image: !Sub ${BackendPHPImage}:${Version}
+          # Memory: 128
+          PortMappings:
+            - ContainerPort: 80
+          LogConfiguration:
+            LogDriver: awslogs
+            Options:
+              awslogs-group: !Ref PHPLogGroup
+              awslogs-region: !Ref AWS::Region
+              awslogs-stream-prefix: ecs
+  # A role needed by ECS
+  ExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Join ['', [!Ref ServiceName, !Ref Environment, ExecutionRole]]
+      AssumeRolePolicyDocument:
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: ecs-tasks.amazonaws.com
+            Action: 'sts:AssumeRole'
+      ManagedPolicyArns:
+        - 'arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy'
+
+  # A role for the containers
+  TaskRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Join ['', [!Ref ServiceName, !Ref Environment, TaskRole]]
+      AssumeRolePolicyDocument:
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: ecs-tasks.amazonaws.com
+            Action: 'sts:AssumeRole'
+
+  # A policy for containers' role
+  TaskPolicy:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyName: !Sub "${AWS::StackName}TaskPolicy"
+      PolicyDocument:
+        Statement:
+          - Effect: Allow
+            Action:
+              - ec2:AuthorizeSecurityGroupIngress
+              - ec2:Describe*
+              - elasticloadbalancing:DeregisterInstancesFromLoadBalancer
+              - elasticloadbalancing:Describe*
+              - elasticloadbalancing:RegisterInstancesWithLoadBalancer
+              - elasticloadbalancing:DeregisterTargets
+              - elasticloadbalancing:DescribeTargetGroups
+              - elasticloadbalancing:DescribeTargetHealth
+              - elasticloadbalancing:RegisterTargets
+              - ssm:Get*
+            Resource: "*"
+      Roles:
+        - Ref: TaskRole
+
+  BackendLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub "${AWS::StackName}-Backend"
+      RetentionInDays: 7
+
+  PHPLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub "${AWS::StackName}-PHP"
+      RetentionInDays: 7
+
+  ContainerSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: !Join ['', [!Ref ServiceName, !Ref Environment, ContainerSecurityGroup]]
+      VpcId: !Ref VPCID
+      SecurityGroupIngress:
+        - IpProtocol: -1
+          SourceSecurityGroupId: !Ref LoadBalancerSecurityGroup
+
+  LoadBalancerSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: !Join ['', [!Ref ServiceName, !Ref Environment, LoadBalancerSecurityGroup]]
+      VpcId: !Ref VPCID
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 443
+          ToPort: 443
+          CidrIp: 0.0.0.0/0
+
+  ALB:
+    Type: AWS::ElasticLoadBalancingV2::LoadBalancer
+    Properties:
+      Scheme: internet-facing
+      LoadBalancerAttributes:
+        - Key: idle_timeout.timeout_seconds
+          Value: '60'
+        - Key: routing.http2.enabled
+          Value: "true"
+      Subnets:
+        - !Select [ 0, !Ref Subnets ]
+        - !Select [ 1, !Ref Subnets ]
+        - !Select [ 2, !Ref Subnets ]
+      SecurityGroups:
+        - !Ref LoadBalancerSecurityGroup
+
+  HTTPListener:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties:
+      DefaultActions:
+        - Type: redirect
+          RedirectConfig:
+            Host: "#{host}"
+            Path: "/#{path}"
+            Port: "443"
+            Protocol: "HTTPS"
+            Query: "#{query}"
+            StatusCode: "HTTP_302"
+      LoadBalancerArn: !Ref ALB
+      Port: 80
+      Protocol: HTTP
+
+  HTTPSListener:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties:
+      DefaultActions:
+        - Type: forward
+          TargetGroupArn: !Ref BackendTG
+      LoadBalancerArn: !Ref ALB
+      Port: 443
+      Protocol: HTTPS
+      Certificates:
+        - CertificateArn: !Ref ACMCertArn
+
+  BackendListenerRule:
+    Type: AWS::ElasticLoadBalancingV2::ListenerRule
+    Properties:
+      Actions:
+        - Type: forward
+          TargetGroupArn: !Ref BackendTG
+      Conditions:
+        - Field: path-pattern
+          Values:
+            - "/api/*"
+      ListenerArn: !Ref HTTPSListener
+      Priority: 1
+
+  BackendTG:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties:
+      HealthCheckIntervalSeconds: 20
+      HealthCheckPath: /.well-known/apollo/server-health
+      HealthCheckProtocol: HTTP
+      HealthCheckTimeoutSeconds: 5
+      HealthyThresholdCount: 2
+      Matcher:
+        HttpCode: 200-299
+      Name: !Join ['', [!Ref ServiceName, !Ref Environment, TargetGroup]]
+      Port: !Ref ContainerPort
+      Protocol: HTTP
+      TargetGroupAttributes:
+        - Key: deregistration_delay.timeout_seconds
+          Value: "0"
+      UnhealthyThresholdCount: 5
+      TargetType: ip
+      VpcId: !Ref VPCID
+
+  BackendService:
+    Type: AWS::ECS::Service
+    # This dependency is needed so that the load balancer is setup correctly in time
+    DependsOn:
+      - ALB
+      - TaskPolicy
+      - HTTPSListener
+      - HTTPListener
+      - BackendListenerRule
+    Properties:
+      ServiceName: !Join ['', [!Ref ServiceName, !Ref Environment ] ]
+      Cluster: !Ref ECSCluster
+      TaskDefinition: !Ref BackendTask
+      DeploymentConfiguration:
+        MinimumHealthyPercent: 100
+        MaximumPercent: 200
+      DesiredCount: 1
+      HealthCheckGracePeriodSeconds: 300
+      LaunchType: FARGATE
+      NetworkConfiguration:
+        AwsvpcConfiguration:
+          # change to DISABLED if you're using private subnets that have access to a NAT gateway
+          AssignPublicIp: ENABLED
+          Subnets:
+            - !Select [ 0, !Ref Subnets ]
+            - !Select [ 1, !Ref Subnets ]
+            - !Select [ 2, !Ref Subnets ]
+          SecurityGroups:
+            - !Ref ContainerSecurityGroup
+            - !Ref VPCDefaultSG
+      LoadBalancers:
+        - ContainerName: !Sub ${ServiceName}-backend
+          ContainerPort: !Ref ContainerPort
+          TargetGroupArn: !Ref BackendTG
+
+  ScalingRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub "${AWS::StackName}-Scaling-Role"
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - application-autoscaling.amazonaws.com
+            Action:
+              - sts:AssumeRole
+
+  ScalingRolePolicy:
+    Type: AWS::IAM::Policy
+    Properties:
+      Roles:
+        - !Ref ScalingRole
+      PolicyName: !Sub "${AWS::StackName}-Scaling-Role-Policy1"
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Action:
+              - application-autoscaling:*
+              - ecs:RunTask
+              - ecs:UpdateSerice
+              - ecs:DescribeServices
+              - cloudwatch:PutMetricAlarm
+              - cloudwatch:DescribeAlarms
+              - cloudwatch:GetMetricStatistics
+              - cloudwatch:SetAlarmState
+              - cloudwatch:DeleteAlarms
+            Resource: '*'
+
+  BackendScalableTarget:
+    DependsOn:
+      - BackendTask
+      - ScalingRolePolicy
+    Type: AWS::ApplicationAutoScaling::ScalableTarget
+    Properties:
+      MaxCapacity: 3
+      MinCapacity: 1
+      ResourceId: !Join ['/', [service, !Ref ECSCluster, !GetAtt BackendService.Name]]
+      RoleARN: !GetAtt ScalingRole.Arn
+      ScalableDimension: ecs:service:DesiredCount
+      ServiceNamespace: ecs
+
+  ScalingPolicy:
+    DependsOn:
+      - BackendService
+      - BackendTask
+    Type: AWS::ApplicationAutoScaling::ScalingPolicy
+    Properties:
+      PolicyName: !Sub "${AWS::StackName}-Scaling-Policy"
+      PolicyType: TargetTrackingScaling
+      ScalingTargetId: !Ref BackendScalableTarget
+      TargetTrackingScalingPolicyConfiguration:
+        TargetValue: 50
+        ScaleInCooldown: 60
+        ScaleOutCooldown: 60
+        PredefinedMetricSpecification:
+          PredefinedMetricType: ECSServiceAverageCPUUtilization
+
+  BackendDNSRecord:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      HostedZoneId: !Ref Route53HostedZoneID
+      Name: !Join ['.',['api',!Ref Environment,!Ref WebsiteFQDN]]
+      Type: A
+      AliasTarget:
+        HostedZoneId: !GetAtt ALB.CanonicalHostedZoneID
+        DNSName: !Join ['', ['dualstack.',!GetAtt ALB.DNSName]]
+
+  ##
+  ## Frontend Infra
+  ##
+
+  RootBucket:
+    Type: AWS::S3::Bucket
+    DeletionPolicy: Retain
+    Properties:
+      BucketName: !Join ['-', [!FindInMap [EnvironmentMap, !Ref Environment, LowerCaseValue],!Ref BucketName]]
+
+  CloudfrontOriginAccessIdentity:
+    Type: AWS::CloudFront::CloudFrontOriginAccessIdentity
+    Properties:
+      CloudFrontOriginAccessIdentityConfig:
+        Comment:
+          Fn::Join:
+            - ''
+            - - Access Identity for
+              - Ref: WebsiteFQDN
+
+  RootBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket:
+        Ref: RootBucket
+      PolicyDocument:
+        Statement:
+          - Action:
+              - s3:GetObject
+            Effect: Allow
+            Resource:
+              Fn::Join:
+                - ''
+                - - 'arn:aws:s3:::'
+                  - Ref: RootBucket
+                  - "/*"
+            Principal:
+              AWS:
+                Fn::Join:
+                  - ''
+                  - - 'arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity '
+                    - Ref: CloudfrontOriginAccessIdentity
+
+  CloudfrontDistribution:
+    Type: AWS::CloudFront::Distribution
+    DependsOn:
+      - RootBucket
+      - ALB
+    Properties:
+      DistributionConfig:
+        Origins:
+          # Frontend via S3
+          - DomainName: !GetAtt RootBucket.DomainName
+            Id:
+              Fn::Join:
+                - ''
+                - - S3-
+                  - !GetAtt RootBucket.DomainName
+            S3OriginConfig:
+              OriginAccessIdentity:
+                Fn::Join:
+                  - ''
+                  - - origin-access-identity/cloudfront/
+                    - Ref: CloudfrontOriginAccessIdentity
+        Enabled: 'true'
+        Comment:
+          Fn::Join:
+            - ''
+            - - 'CF Distribution for  '
+              - Ref: WebsiteFQDN
+        DefaultRootObject: index.html
+        Aliases:
+          - !Join ['.',[!FindInMap [EnvironmentMap, !Ref Environment, LowerCaseValue], !Ref WebsiteFQDN]]
+          - !If [Is_Production, 'www.cartels.com', 'staging-testing-grounds.downtown-mafia.com']
+          - !If [Is_Production, 'prod.cf.infra.cartels.com', 'staging.cf.infra.cartels.com']
+        HttpVersion: 'http2'
+        DefaultCacheBehavior:
+          AllowedMethods:
+            - GET
+            - HEAD
+            - OPTIONS
+          TargetOriginId:
+            Fn::Join:
+              - ''
+              - - S3-
+                - !GetAtt RootBucket.DomainName
+          ForwardedValues:
+            QueryString: 'false'
+            Cookies:
+              Forward: none
+          ViewerProtocolPolicy: redirect-to-https
+        CustomErrorResponses:
+          - ErrorCode: '404'
+            ResponsePagePath: "/"
+            ResponseCode: '200'
+            ErrorCachingMinTTL: '7200'
+          - ErrorCode: '403'
+            ResponsePagePath: "/"
+            ResponseCode: '200'
+            ErrorCachingMinTTL: '30'
+        PriceClass: PriceClass_All
+        ViewerCertificate:
+          AcmCertificateArn: !Ref ACMCertArn
+          SslSupportMethod: sni-only
+          MinimumProtocolVersion: TLSv1.2_2018
+
+  DNSRecord:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      HostedZoneId: !Ref Route53HostedZoneID
+      Name: !Join ['.',[!Ref Environment, !Ref WebsiteFQDN]]
+      Type: A
+      AliasTarget:
+        HostedZoneId: Z2FDTNDATAQYW2 # Default ID for all Cloudfront distros
+        DNSName: !GetAtt CloudfrontDistribution.DomainName
+
+Outputs:
+  CloudfrontURL:
+    Value:
+      Fn::GetAtt:
+        - CloudfrontDistribution
+        - DomainName
+  MainURL:
+    Value:
+      Fn::Join:
+        - ''
+        - - https://
+          - !FindInMap [EnvironmentMap, !Ref Environment, LowerCaseValue]
+          - '.'
+          - !Ref WebsiteFQDN

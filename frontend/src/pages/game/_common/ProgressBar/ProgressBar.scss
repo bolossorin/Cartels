@@ -1,0 +1,107 @@
+@import 'common';
+
+.progress-bar {
+  width: 100%;
+  position: relative;
+  height: 25px;
+  border: solid black 2px;
+  color: $white-font-darker;
+  text-transform: uppercase;
+  background-size: 450px;
+
+  .progress-amount {
+    position: absolute;
+    line-height: 23px;
+    left: 5px;
+    bottom: 0;
+    z-index: 1;
+  }
+
+  .bar-label {
+    position: absolute;
+    line-height: 23px;
+    bottom: 0;
+    z-index: 1;
+    text-align: center;
+    left: 0;
+    background: linear-gradient(to right, transparent, transparent, rgba(0, 0, 0,.5), transparent, transparent);
+  }
+
+  .bar-unit {
+    position: absolute;
+    right: -2px;
+    top: -4px;
+    height: 30px;
+    width: 35px;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+  }
+
+  .full-bar {
+    width: calc(100% - 32px);
+    height: 100%;
+    background: rgba(2, 42, 57, 0.88);
+    position: absolute;
+    z-index: 0;
+
+    .bar {
+      max-width: 100%;
+      border-right: solid 1px #FDC62C;
+      height: 100%;
+      background: linear-gradient(to bottom, #0581A5A0 0%, #0581A5F0 100%), url("../../../../assets/images/stripes.png"), linear-gradient(to bottom, #0581A5 0%, #0581A5 100%);
+      transition: 0.05s all;
+    }
+  }
+
+  &__pending {
+    .full-bar {
+      .bar {
+        background: url("../../../../assets/images/stripes.png"), linear-gradient(to bottom, #444 0%, #313131 100%);
+        border-right: none;
+      }
+    }
+  }
+
+  &__no-unit {
+    .full-bar {
+      width: 100%;
+    }
+
+    .bar-label {
+      right: 4px;
+    }
+  }
+
+  &__full {
+    .full-bar {
+      .bar {
+        filter: hue-rotate(300deg);
+        border-right: none;
+      }
+    }
+  }
+}
+
+@keyframes animateToFull {
+  0% {
+      max-width: 0;
+      opacity: 0;
+  }
+  20% {
+      max-width: 0;
+      opacity: 0;
+}
+  100% {
+      max-width: 750px;
+      opacity: 1;
+  }
+}
+
+.animate-to-full {
+  .bar {
+    animation: animateToFull cubic-bezier(.17,.67,.37,1) 2.5s;
+  }
+}

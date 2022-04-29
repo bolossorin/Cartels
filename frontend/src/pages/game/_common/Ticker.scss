@@ -1,0 +1,31 @@
+@import 'common';
+
+.ticker {
+    &__loading {
+        opacity: 0.5;
+    }
+
+    &__panic {
+        color: $font-light-blue;
+        animation: panic-pulse 1s infinite;
+    }
+
+    &__expired {
+        opacity: 0.5;
+    }
+}
+
+@keyframes panic-pulse {
+    0% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+    100% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+}

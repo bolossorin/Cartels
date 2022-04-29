@@ -1,0 +1,68 @@
+@import "common";
+
+.stats-item {
+  padding: $content-padding;
+  display: flex;
+  align-items: flex-start;
+
+  &:nth-of-type(2n) {
+    background: rgba(255, 255, 255, 0.035);
+  }
+
+  &__image {
+    margin-right: $padding-m;
+    flex-shrink: 0;
+    height: 64px;
+    width: 64px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 6px;
+  }
+
+
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+
+    &__name {
+      font-family: $font-title;
+      font-size: $font-size-m;
+      text-transform: uppercase;
+      margin-bottom: 3px;
+    }
+
+    &__stats {
+      flex-grow: 1;
+      display: grid;
+      width: 100%;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+
+      &__stat {
+        color: $color-body-grey;
+        margin-right: $content-padding;
+        line-height: 35px;
+        text-transform: capitalize;
+
+        span {
+          font-family: $font-accented-header;
+        }
+
+        &--blue {
+          span {
+            color: $color-cartels-blue;
+          }
+
+        }
+
+        &--red {
+          span {
+            color: $color-red-alert;
+          }
+        }
+      }
+    }
+  }
+
+}

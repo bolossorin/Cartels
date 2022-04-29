@@ -1,0 +1,47 @@
+@import "common";
+
+.text-tag {
+  display: inline-block;
+
+  width: auto;
+
+  background-color: #1d2428;
+  border-radius: 4px 3px 3px 4px;
+
+  //border-left: 1px solid rgba(0, 0, 0, 0.35);
+
+  /* This makes room for the triangle */
+  margin-right: 19px;
+
+  position: relative;
+
+  line-height: 38px;
+
+  padding: 0 10px 0 10px;
+}
+
+/* Makes the triangle */
+.text-tag:before {
+  content: "";
+  position: absolute;
+  display: block;
+  right: -16px;
+  width: 0;
+  height: 0;
+  border-top: 19px solid transparent;
+  border-bottom: 19px solid transparent;
+  border-left: 18px solid #1d2428;
+}
+
+/* Makes the circle */
+.text-tag:after {
+  content: "";
+  background-color: #00000055;
+  border-radius: 50%;
+  width: 6px;
+  height: 6px;
+  display: block;
+  position: absolute;
+  right: -9px;
+  top: 17px;
+}

@@ -1,0 +1,27 @@
+@import 'common';
+
+.help-icon {
+    cursor: pointer;
+    display: inline-flex;
+    opacity: 0.5;
+
+    &:hover {
+        opacity: 1;
+    }
+
+    img {
+        height: 100%;
+        width: 100%;
+    }
+}
+
+.help-modal {
+    max-width: 55vw;
+    min-width: 35vw;
+
+    &__content {
+        padding: 32px;
+        color: $white-font-darker;
+        font-size: 16px;
+    }
+}

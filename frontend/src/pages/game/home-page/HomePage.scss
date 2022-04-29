@@ -1,0 +1,81 @@
+@import "common";
+
+.home-page {
+  padding: 0;
+
+  &__header {
+    position: relative;
+    height: 450px;
+
+    &__background {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      background: url('../../../assets/images/home/Group 277.png');
+
+      &--gangster {
+        background: url('../../../assets/images/CharacterCreate/gangster.png'), url('../../../assets/images/home/Group 277.png');
+        background-size: auto 326px, cover;
+        background-position: center bottom 36px, center;
+        background-repeat: no-repeat;
+
+      }
+
+      &--entrepreneur {
+        background: url('../../../assets/images/CharacterCreate/entrepreneur.png'), url('../../../assets/images/home/Group 277.png');
+        background-size: auto 326px, cover;
+        background-position: center bottom 36px, center;
+        background-repeat: no-repeat;
+
+      }
+
+      &--assassin {
+        background: url('../../../assets/images/CharacterCreate/assassin.png'), url('../../../assets/images/home/Group 277.png');
+        background-size: auto 326px, cover;
+        background-position: center bottom 36px, center;
+        background-repeat: no-repeat;
+
+      }
+    }
+
+    &__text {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      height: 100%;
+      flex-direction: column;
+      justify-content: space-between;
+
+      &__top {
+        padding: $content-padding;
+
+        @media (max-width: $breakpoint-intermediary) {
+          padding: $content-padding-mobile;
+        }
+
+        .name-tag {
+          .role-img {
+            display: none;
+          }
+
+          p {
+            font-family: $font-accented-header;
+            font-size: $font-size-xl;
+          }
+        }
+
+        .crew-tag {
+          font-size: $font-size-m;
+        }
+      }
+
+      &__bottom {
+        text-align: center;
+        line-height: 36px;
+        font-family: $font-accented-header;
+        font-size: $font-size-xl;
+        background: linear-gradient(to right, #ffffff1A 0%, #ffffff54 50%, #ffffff1A 100%);
+      }
+    }
+  }
+}

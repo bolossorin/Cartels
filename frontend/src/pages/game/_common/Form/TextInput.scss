@@ -1,0 +1,18 @@
+.form__text-input {
+    font-size: 20px;
+    padding: 16px;
+    background: #1d4d68;
+    border: 1px solid #26739e;
+    color: #c6ebf7;
+    text-align: center;
+
+    &__full-width {
+        width: 100%;
+        border-left: 0;
+        border-right: 0;
+    }
+
+    &::placeholder {
+        color: #c6ebf7;
+    }
+}
