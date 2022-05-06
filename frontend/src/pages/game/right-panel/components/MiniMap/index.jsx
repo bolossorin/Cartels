@@ -29,13 +29,12 @@ function MiniMap() {
     const { data } = useQuery(LOCATION_QUERY, {
         pollInterval: 25000,
     })
-
-    const location = data?.viewer?.player?.district
+    const location = data?.viewer?.player?.district;
     const locationInitials = location
         ? location.match(/[A-Z]/g).join('').toLowerCase()
-        : 'vh'
-    const inmates = data?.jail?.inmatesCount
-    const activePlayers = data?.activePlayers?.count
+        : 'vh';
+    const inmates = data?.jail?.inmatesCount;
+    const activePlayers = data?.activePlayers?.count;
 
     return (
         <>
