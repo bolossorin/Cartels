@@ -9,12 +9,12 @@ import TextTag from '../TextTag/TextTag'
 
 import './Showcase.scss'
 import BalanceItem from '../../game/_common/BalanceItem'
-import Button from '../Button'
 import { gql } from 'apollo-boost'
 import { useQuery } from '@apollo/react-hooks'
 import { useToast } from '../../game/_common/Toast'
 import InventoryItemShowcaseConsume from './InventoryItemShowcaseConsume'
 import InventoryItemShowcaseEquip from './InventoryItemShowcaseEquip'
+import InventoryItemShowcaseOpen from './InventoryItemShowcaseOpen'
 
 const ITEM_SHOWCASE_QUERY = gql`
     query InventoryItemShowcase($input: GetInventoryItemInput!) {
@@ -127,6 +127,12 @@ function InventoryItemShowcase({ id, isOpen, handleClose }) {
                     </div>
                     {item?.variant === 'consumable' && (
                         <InventoryItemShowcaseConsume
+                            id={id}
+                            handleClose={handleClose}
+                        />
+                    )}
+                    {item?.variant === 'package' && (
+                        <InventoryItemShowcaseOpen
                             id={id}
                             handleClose={handleClose}
                         />

@@ -1,0 +1,96 @@
+@import "common";
+
+.loot-showcase {
+  background: #141414;
+  border-radius: 12px;
+  min-width: 600px;
+  min-height: 400px;
+  box-shadow: 0 14px 14px #00000099;
+
+  .modal-inner {
+    background: unset;
+  }
+
+  &__content {
+    color: $color-white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    h1 {
+      font-family: $font-accented-header;
+    }
+
+    &__opened-item {
+      img {
+        max-height: 150px;
+        max-width: 150px;
+      }
+    }
+
+    &__loot-items {
+      height: 300px;
+
+      > h2 {
+        font-family: $font-accented-header;
+        font-size: 24px;
+      }
+
+      &__grid {
+        display: grid;
+        grid-template-columns: auto auto auto auto;
+        align-items: center;
+        max-width: 600px;
+
+        &__item {
+          height: 85px;
+          width: 85px;
+          border-radius: 8px;
+
+          display: flex;
+          flex-direction: column;
+          //box-shadow: 0 0 4px 4px rgba(65, 165, 203, 0.04);
+          margin: 2px;
+
+          &__image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 6px;
+
+            > img {
+              max-height: 75px;
+              max-width: 75px;
+            }
+          }
+
+          &__desc {
+            background-color: #00000040;
+            flex-grow: 1;
+            padding: 12px;
+            display: flex;
+            //justify-content: center;
+            align-items: center;
+
+            > h3 {
+              font-family: $font-body-heavy;
+            }
+          }
+        }
+      }
+    }
+
+    &__buttons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: row;
+
+      > button {
+        margin: 16px;
+        min-width: 180px;
+      }
+    }
+  }
+}

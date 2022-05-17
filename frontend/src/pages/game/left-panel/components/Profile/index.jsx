@@ -50,13 +50,13 @@ function Profile() {
                         alt={player?.name}
                     />
                 </Link>
-                <Link to={`/eggcombinator`} className="easter-container">
-                    <img
-                        src={Egg}
-                        className="egg-combinator"
-                        alt={`Easter event`}
-                    />
-                </Link>
+                {/*<Link to={`/eggcombinator`} className="easter-container">*/}
+                {/*    <img*/}
+                {/*        src={Egg}*/}
+                {/*        className="egg-combinator"*/}
+                {/*        alt={`Easter event`}*/}
+                {/*    />*/}
+                {/*</Link>*/}
                 <div className="profile-info-container">
                     <div className="names">
                         <NameTag player={player} />
